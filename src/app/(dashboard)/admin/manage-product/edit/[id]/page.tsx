@@ -28,7 +28,7 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
     categoryId: data?.categoryId || '',
   };
   const onSubmit = async (datas: any) => {
-    message.loading('Updating.....');
+   
     try {
       datas.price = parseInt(datas.price);
       datas.quantity = parseInt(datas.quantity);

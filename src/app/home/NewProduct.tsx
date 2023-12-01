@@ -78,12 +78,10 @@ export default function NewProduct() {
                     </button>
 
                     <Link href={`/products/${product?.id}`}>
-                      <Image
+                      <img
                         src={product?.image || 'default-image-url'}
                         alt=""
-                        className="h-20 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-100"
-                        width={150}
-                        height={150}
+                        className="h-20 w-full sm:h-full sm:w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-100"
                       />
                     </Link>
 

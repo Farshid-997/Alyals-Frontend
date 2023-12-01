@@ -46,12 +46,11 @@ export default function ProductPage() {
   const meta = data?.meta;
   console.log('fdfadfad', products);
   const deleteHandler = async (id: string) => {
-    message.loading('Deleting.....');
     try {
       //   console.log(data);
       const res = await deleteProduct(id);
       if (res) {
-        message.success('Offered Course Deleted successfully');
+        message.success('Product Deleted successfully');
       }
     } catch (err: any) {
       //   console.error(err.message);
