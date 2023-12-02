@@ -17,11 +17,7 @@ function HomePage() {
       <CarouselPage />
       <ProductsList />
       <NewProduct />
-      {/* <ServiceList />
-      <CollectionPage />
-      <SectionPage />
-      <SideSection />
-      <Testmonial /> */}
+    
       <Footer />
     </div>
   );

@@ -42,12 +42,12 @@ export default function ProductsList() {
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <header>
-          <h2 className="text-xl font-bold text-gray-900 sm:text-3xl text-center">
+          <h2 className="text-xl font-bold text-gray-900 sm:text-3xl text-center font-sans mt-10 mb-10">
             Product Collection
           </h2>
         </header>
 
-        <div className="mt-8 sm:flex sm:items-center sm:justify-between">
+        {/* <div className="mt-8 sm:flex sm:items-center sm:justify-between">
           <div className="block sm:hidden">
             <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
               <span className="text-sm font-medium"> Filters & Sorting </span>
@@ -263,9 +263,9 @@ export default function ProductsList() {
           <p className="me-2 text-sm  cursor-pointer">DEAR KLAIRS</p>
           <p className="me-2 text-sm  cursor-pointer">BY WISHTREND</p>
           <p className="me-2 text-sm  cursor-pointer">I'M FROM</p>
-        </div>
+        </div> */}
 
-        <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5 font-sans">
           {products
             ?.filter(
               (p: IProduct | null | undefined) => p?.productstate === 'normal'
@@ -276,11 +276,12 @@ export default function ProductsList() {
                 image: string | undefined;
                 name: string | number;
                 price: string | number;
+                stock:string|undefined;
               }) => (
                 <div key={product?.id}>
                   <div className="group relative block overflow-hidden">
                     <button className="absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-                      <span className="sr-only">Wishlist</span>
+                      <span className="sr-only font-sans">Wishlist</span>
 
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -302,17 +303,18 @@ export default function ProductsList() {
                       <Image
                         src={product?.image || 'default-image-url'}
                         alt=""
-                        className="h-20 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-100"
+                        className="h-20 w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-100 "
                         width={150}
                         height={150}
                       />
                     </Link>
 
                     <div className="p-6  h-fit w-full">
-                      <p className="whitespace-normal ms-2 text-center text-sm line-clamp-1 ">
+                      <p className="whitespace-normal ms-2 text-center text-sm line-clamp-1 font-sans font-semibold">
                         {product?.name}
                       </p>
 
+                      <p className='font-sans text-center'> {product?.stock}</p>
                       <div className="flex items-center mb-2 mt-2 ms-10 text-yellow-500">
                         {' '}
                         <FaRegStar />
@@ -322,10 +324,12 @@ export default function ProductsList() {
                         <FaRegStar />{' '}
                       </div>
 
-                      <p className="text-center">৳ {product?.price}</p>
+                      <p className="text-center font-sans">
+                        ৳ {product?.price}
+                      </p>
 
                       <p
-                        className="text-gray-500 text-center hover:text-black cursor-pointer font-bold"
+                        className="text-black-700 text-center hover:text-blue-900 cursor-pointer font-bold font-sans"
                         onClick={() => {
                           handleAddToCart(product);
                         }}

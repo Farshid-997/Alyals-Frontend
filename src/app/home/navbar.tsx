@@ -56,7 +56,7 @@ function NavbarPage() {
   };
   let Links = [
     { name: 'HOME', link: '/home' },
-    { name: 'SERVICE', link: '/' },
+
     { name: 'ABOUT', link: '/' },
     { name: 'CONTACT', link: '/' },
   ];
@@ -75,6 +75,7 @@ function NavbarPage() {
           onClick={() => {
             router.push('/profile');
           }}
+          className="font-sans"
         >
           Profile
         </Button>
@@ -101,7 +102,7 @@ function NavbarPage() {
             className="font-bold text-2xl cursor-pointer flex items-center gap-1"
           >
             <Image src={img1} alt="" width={40} height={40} />
-            <span>Alyals</span>
+            <span className="font-sans font-semibold text-2xl">Alyals</span>
           </div>
 
           <div
@@ -117,7 +118,10 @@ function NavbarPage() {
             }`}
           >
             {Links.map((link, index) => (
-              <li key={index} className="md:ml-8 md:my-0 my-7 font-semibold">
+              <li
+                key={index}
+                className="md:ml-8 md:my-0 my-7 font-sans font-semibold"
+              >
                 <Link
                   href={link.link}
                   className="text-gray-800 hover:text-blue-400 duration-500"
@@ -128,12 +132,16 @@ function NavbarPage() {
             ))}
             <FaShoppingCart
               onClick={showDrawer}
-              className="w-7 h-7 cursor-pointer md:ml-20 hover:text-blue-500"
+              className="w-7 h-7 cursor-pointer md:ml-20 hover:text-blue-900 "
             />
+            <span className="ml-0.1 text-sm text-red-600 font-bold -mt-6">
+              {cartItems.length}
+            </span>
+
             {userLoggedIn ? (
               <Dropdown overlay={<Menu items={items} />}>
                 <Avatar
-                  className="md:ml-8 px-3 py-1"
+                  className="md:ml-6 px-2 py-2"
                   size="large"
                   icon={<FaUser />}
                 />
@@ -143,7 +151,7 @@ function NavbarPage() {
                 onClick={() => {
                   router.push('/login');
                 }}
-                className="btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static font-"
+                className="btn bg-blue-600 text-white md:ml-8 font-semibold px-3 py-1 rounded duration-500 md:static font-sans"
               >
                 Login / Register
               </button>
@@ -156,14 +164,14 @@ function NavbarPage() {
         placement="right"
         onClose={onClose}
         open={open}
-       
+        headerStyle={{ backgroundColor: 'white', fontFamily: 'sans' }}
       >
         <section>
           <div className="mx-auto max-w-screen-xl px-1 py-2 sm:px-6 sm:py-12 lg:px-2">
             <div className="mx-auto max-w-3xl">
               <div className="mt-3">
                 {cartItems.length < 1 && (
-                  <h1 className="text-center text-2xl font-bold">
+                  <h1 className="text-center text-2xl font-bold font-sans">
                     Your shopping cart is empty!
                   </h1>
                 )}
@@ -179,26 +187,31 @@ function NavbarPage() {
                       />
 
                       <div>
-                        <h3 className="text-sm text-red-900">{item.name}</h3>
+                        <h3 className="text-md text-red-900 font-sans ">
+                          {item.name}
+                        </h3>
 
-                        <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
+                        <dl className="mt-0.5 space-y-px text-[10px] text-gray-600 font-sans">
                           <div>
-                            <dt className="inline">Price:</dt>
-                            <dd className="inline">{item.price}</dd>
+                            <dt className="inline font-sans">Price:</dt>
+                            <dd className="inline font-sans">{item.price}</dd>
                           </div>
                         </dl>
                       </div>
 
                       <div>
-                        <label htmlFor="Quantity" className="sr-only">
+                        <label
+                          htmlFor="Quantity "
+                          className="sr-only font-sans"
+                        >
                           {' '}
                           Quantity{' '}
                         </label>
 
-                        <div className="flex items-center">
+                        <div className="flex items-center ">
                           <button
                             type="button"
-                            className="w-5 h-10 leading-10 text-gray-600 transition hover:opacity-75"
+                            className="w-5 h-10 leading-10 text-gray-600 transition hover:opacity-75 font-sans"
                             onClick={() => {
                               if (item.quantity > 1) {
                                 handleUpdateQuantity(
@@ -221,7 +234,7 @@ function NavbarPage() {
                                 handleUpdateQuantity(item.id, newQuantity);
                               }
                             }}
-                            className="h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                            className="font-sans h-10 w-10 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
                           />
 
                           <button
@@ -237,7 +250,9 @@ function NavbarPage() {
                             onClick={() => handleRemoveFromCart(item.id)}
                             className="text-gray-600 transition hover:text-red-600"
                           >
-                            <span className="sr-only">Remove item</span>
+                            <span className="sr-only font-sans">
+                              Remove item
+                            </span>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"
@@ -263,28 +278,28 @@ function NavbarPage() {
                   <div className="w-screen max-w-lg space-y-4">
                     <dl className="space-y-0.5 text-sm text-gray-700">
                       <div className="flex justify-between">
-                        <dt>Subtotal</dt>
+                        <dt className="font-sans">Subtotal</dt>
                         {/* <dd>${totalSum.toFixed(2)}</dd> */}
                       </div>
 
-                      <div className="flex justify-between">
+                      <div className="flex justify-between font-sans">
                         <dt>৳ VAT</dt>
                         <dd>৳ 25</dd>
                       </div>
 
-                      <div className="flex justify-between">
+                      <div className="flex justify-between font-sans">
                         <dt>Discount</dt>
                         <dd>-৳20</dd>
                       </div>
 
-                      <div className="flex justify-between !text-base font-medium">
+                      <div className="flex justify-between !text-base font-medium font-sans">
                         <dt>Total</dt>
                         <dd>TK {totalSum.toFixed(2)}</dd>
                       </div>
                     </dl>
 
-                    <div className="flex justify-end">
-                      <span className="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-700">
+                    {/* <div className="flex justify-end">
+                      <span className="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-700 font-sans">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -300,16 +315,16 @@ function NavbarPage() {
                           />
                         </svg>
 
-                        <p className="whitespace-nowrap text-xs">
+                        <p className="whitespace-nowrap text-xs font-sans">
                           2 Discounts Applied
                         </p>
                       </span>
-                    </div>
+                    </div> */}
 
                     <div className="flex justify-end">
                       <Link
                         href="/checkout"
-                        className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                        className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600 font-sans"
                       >
                         Checkout
                       </Link>

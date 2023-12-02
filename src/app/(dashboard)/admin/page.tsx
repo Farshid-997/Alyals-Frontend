@@ -8,7 +8,7 @@ import {
 import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
 import Form from './../../../components/froms/Form';
-import FormInput from './../../../components/froms/FormInput';
+import FormInput from '../../../components/Froms/FormInput';
 
 export default function AdminPage() {
   const { userId } = getUserInfo() as any;

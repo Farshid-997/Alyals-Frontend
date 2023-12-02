@@ -33,7 +33,7 @@ export default function Footer() {
         <div className="border border-slate-100 "></div>
 
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-left font-sans">
             <p className="text-lg font-medium text-gray-900">
               CUSTOMER SERVICE
             </p>
@@ -86,7 +86,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-left font-sans">
             <p className="text-lg font-medium text-gray-900"> COMPANY</p>
 
             <ul className="mt-8 space-y-4 text-sm">
@@ -128,7 +128,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-left font-sans">
             <p className="text-lg font-medium text-gray-900">SOCIAL MEDIA</p>
 
             <ul className="mt-8 space-y-4 text-sm">
@@ -170,7 +170,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          <div className="text-center sm:text-left font-sans">
             <p className="text-lg font-medium text-gray-900">PROFILE</p>
 
             <ul className="mt-8 space-y-4 text-sm">
@@ -220,7 +220,7 @@ export default function Footer() {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-rose-400 transition hover:text-teal-600/75"
+                className="text-blue-900 transition hover:text-rose-600/75 font-sans"
               >
                 <span className="sr-only">Facebook</span>
                 <svg
@@ -243,7 +243,7 @@ export default function Footer() {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-rose-400 transition hover:text-teal-600/75"
+                className="text-blue-900 transition hover:text-rose-600/75 font-sans"
               >
                 <span className="sr-only">Instagram</span>
                 <svg
@@ -266,7 +266,7 @@ export default function Footer() {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-rose-400 transition hover:text-teal-600/75"
+                className="text-blue-900 transition hover:text-rose-600/75 font-sans"
               >
                 <span className="sr-only">Twitter</span>
                 <svg
@@ -285,7 +285,7 @@ export default function Footer() {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-rose-400 transition hover:text-teal-600/75"
+                className="text-blue-900 transition hover:text-rose-600/75 font-sans"
               >
                 <span className="sr-only">GitHub</span>
                 <svg
@@ -308,7 +308,7 @@ export default function Footer() {
                 href="/"
                 rel="noreferrer"
                 target="_blank"
-                className="text-rose-400 transition hover:text-teal-600/75"
+                className="text-blue-900 transition hover:text-rose-600/75 font-sans"
               >
                 <span className="sr-only">Dribbble</span>
                 <svg
@@ -331,12 +331,12 @@ export default function Footer() {
 
           <div className="mt-16 sm:flex sm:items-center sm:justify-between">
             <div className="flex justify-center text-rose-400 sm:justify-start">
-              <p className="text-rose-400 hover:text-teal-600 font-bold  cursor-pointer">
+              <p className="text-blue-900 transition hover:text-rose-600/75 font-sans font-bold  cursor-pointer text-xl">
                 Alyals
               </p>
             </div>
 
-            <p className="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-right">
+            <p className="mt-4 text-center text-sm text-gray-400 sm:mt-0 sm:text-right font-sans">
               Copyright &copy; 2023. All rights reserved.
             </p>
           </div>

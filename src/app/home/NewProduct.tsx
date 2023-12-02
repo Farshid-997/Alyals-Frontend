@@ -39,7 +39,7 @@ export default function NewProduct() {
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <header>
-          <h2 className="text-xl font-bold text-gray-900 sm:text-3xl text-center">
+          <h2 className="text-xl font-bold text-gray-900 sm:text-3xl text-center font-sans mt-10 mb-10">
             New Arrival
           </h2>
         </header>
@@ -58,8 +58,8 @@ export default function NewProduct() {
               }) => (
                 <div key={product?.id}>
                   <div className="group relative block overflow-hidden">
-                    <button className="absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-                      <span className="sr-only">Wishlist</span>
+                    <button className=" font-sans absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
+                      <span className="sr-only font-sans">Wishlist</span>
 
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ export default function NewProduct() {
                     </Link>
 
                     <div className="p-6  h-fit w-full">
-                      <p className="whitespace-normal ms-2 text-center text-sm line-clamp-1 ">
+                      <p className=" font-sans whitespace-normal ms-2 text-center text-sm line-clamp-1 ">
                         {product?.name}
                       </p>
 
@@ -99,10 +99,12 @@ export default function NewProduct() {
                         <FaRegStar />{' '}
                       </div>
 
-                      <p className="text-center">৳ {product?.price}</p>
+                      <p className=" font-sans text-center ">
+                        ৳ {product?.price}
+                      </p>
 
                       <p
-                        className="text-gray-500 text-center hover:text-black cursor-pointer font-bold"
+                        className="text-black-500 text-center hover:text-red-900 cursor-pointer font-bold font-sans"
                         onClick={() => {
                           handleAddToCart(product);
                         }}

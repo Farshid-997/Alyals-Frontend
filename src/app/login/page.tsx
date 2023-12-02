@@ -10,6 +10,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import Footer from '../home/footer';
 import Navbar from '../home/navbar';
+import Link from 'next/link';
 const schema = Yup.object().shape({
   email: Yup.string()
     .required('Email is required')
@@ -60,10 +61,10 @@ function Login() {
               width={500}
               height={500}
               alt="login image"
-              className="ms-52 mt-3"
+              className="lg:ms-52 mt-3 sm:mb-20"
             />
           </div>
-          <div className="lg:w-1/2 sm:w-full  p-8 mt-36">
+          <div className="lg:w-1/2 sm:w-full  p-8 lg:mt-36 sm:mt:2">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
                 <label
@@ -128,6 +129,12 @@ function Login() {
                 >
                   Log in
                 </button>
+
+                <Link href="/register">
+                  <p className="text-cyan-600 hover:text-orange-400 text-md cursor-pointer mt-4">
+                    Are you new? Register Then..
+                  </p>
+                </Link>
               </div>
             </form>
           </div>

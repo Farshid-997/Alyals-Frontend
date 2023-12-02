@@ -7,7 +7,7 @@ import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import { useAddproductMutation } from '@/redux/api/adminApi/productApi';
 import { Button, message } from 'antd';
 import Form from './../../../../../components/froms/Form';
-import FormInput from './../../../../../components/froms/FormInput';
+import FormInput from '../../../../../components/Froms/FormInput';
 import FormTextArea from './../../../../../components/froms/FormTextArea';
 
 function CreateProducts() {
