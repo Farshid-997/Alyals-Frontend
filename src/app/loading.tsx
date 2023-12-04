@@ -1,7 +1,7 @@
-import { LoadingOutlined } from '@ant-design/icons';
-import { Row, Space, Spin } from "antd";
+import { Row } from 'antd';
+import loader from '../Assest/loading.gif';
+import Image from 'next/image';
 const Loading = () => {
-  const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
   return (
     <Row
       justify="center"
@@ -10,9 +10,7 @@ const Loading = () => {
         height: '100vh',
       }}
     >
-      <Space>
-       <Spin indicator={antIcon} />;
-      </Space>
+      <Image src={loader} alt="" style={{ color: '#1E3A8A' }}></Image>
     </Row>
   );
 };

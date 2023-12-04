@@ -1,7 +1,7 @@
 'use client';
 import Footer from '@/app/home/footer';
 import { useProductIdQuery } from '@/redux/api/adminApi/productApi';
-import { addToCart, updateQuantity } from '@/redux/api/cartApi/cartApi';
+import { addToCart } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch } from '@/redux/hooks';
 import { useState } from 'react';
 
@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 export default function ProductDetails({ params }: { params: { id: string } }) {
   const { data } = useProductIdQuery(params?.id);
-  console.log(data);
+
   // const [images, setImages] = useState({
   //   img1: 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,b_rgb:f5f5f5/3396ee3c-08cc-4ada-baa9-655af12e3120/scarpa-da-running-su-strada-invincible-3-xk5gLh.png',
   //   img2: 'https://static.nike.com/a/images/f_auto,b_rgb:f5f5f5,w_440/e44d151a-e27a-4f7b-8650-68bc2e8cd37e/scarpa-da-running-su-strada-invincible-3-xk5gLh.png',
@@ -20,11 +20,10 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
 
   const [activeImg, setActiveImage] = useState(data?.image);
 
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(0);
+
   const dispatch = useAppDispatch();
-  const handleUpdateQuantity = (itemId: any, quantity: number) => {
-    dispatch(updateQuantity({ id: itemId, quantity }));
-  };
+
   const handleAddToCart = (item: {
     id: any;
     name: any;
@@ -37,7 +36,7 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
         name: item.name,
         price: item.price,
         image: item.image,
-        quantity: amount, // Use the 'amount' as quantity
+        quantity: amount > 0 ? amount : 1,
       })
     );
   };
@@ -93,7 +92,10 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
           {/* ABOUT */}
           <div className="flex flex-col gap-4 lg:w-2/4">
             <div>
-              <span className=" text-violet-600 font-semibold">
+              <span
+                className="  font-semibold"
+                style={{ color: '#1E3A8A' }}
+              >
                 Product Details
               </span>
               <h1 className="text-3xl font-bold">{data?.name}</h1>
@@ -104,23 +106,26 @@ export default function ProductDetails({ params }: { params: { id: string } }) {
               <div className="flex flex-row items-center">
                 <button
                   className="bg-gray-200 py-2 px-5 rounded-lg text-violet-800 text-3xl"
-                  onClick={() => setAmount((prev) => prev - 1)}
+                  onClick={() => setAmount(amount > 1 ? amount - 1 : 1)}
                 >
-                  -
+                  &minus;
                 </button>
                 <span className="py-4 px-6 rounded-lg">{amount}</span>
+
                 <button
                   className="bg-gray-200 py-2 px-4 rounded-lg text-violet-800 text-3xl"
-                  onClick={() => setAmount((prev) => prev + 1)}
+                  onClick={() => setAmount(amount + 1)}
                 >
                   +
                 </button>
               </div>
+
               <button
                 onClick={() => {
                   handleAddToCart(data);
                 }}
-                className="bg-violet-800 text-white font-semibold py-3 px-16 rounded-xl h-full"
+                className=" text-white font-semibold py-3 px-16 rounded-xl h-full"
+                style={{ backgroundColor: '#1E3A8A' }}
               >
                 Add to Cart
               </button>

@@ -1,13 +1,18 @@
 import Providers from '@/lib/Providers';
 import '@smastrom/react-rating/style.css';
-import type { Metadata } from 'next';
+import type { Metadata as NextMetadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
+interface Metadata extends NextMetadata {
+  favicon?: string;
+}
+
 export const metadata: Metadata = {
   title: 'ALyals',
   description: 'Alyals provide trusted product',
+  favicon: '../../favicon.ico',
 };
 
 export default function RootLayout({

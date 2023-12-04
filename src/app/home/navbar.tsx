@@ -6,7 +6,7 @@ import { isLoggedIn, removeUserInfo } from '@/services/auth.service';
 import { Avatar, Button, Drawer, Dropdown, Menu } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import img1 from '../../Assest/logo.jpg';
+import img1 from '../../Assest/logo.png';
 import { useState } from 'react';
 import Image from 'next/image';
 import {
@@ -47,6 +47,7 @@ function NavbarPage() {
     setOpen(false);
   };
   const dispatch = useAppDispatch();
+
   const handleUpdateQuantity = (itemId: any, quantity: number) => {
     dispatch(updateQuantity({ id: itemId, quantity }));
   };
@@ -54,6 +55,7 @@ function NavbarPage() {
   const handleRemoveFromCart = (itemId: any) => {
     dispatch(removeFromCart(itemId));
   };
+
   let Links = [
     { name: 'HOME', link: '/home' },
 
@@ -226,7 +228,7 @@ function NavbarPage() {
 
                           <input
                             type="number"
-                            id={`Quantity-${item.id}`} // Use a unique identifier for each item
+                            id={`Quantity-${item.id}`}
                             value={item.quantity}
                             onChange={(e) => {
                               const newQuantity = parseInt(e.target.value, 10);
