@@ -2,30 +2,55 @@
 import UMTable from '@/components/ui/UMTable';
 import { useUserOrderIdQuery } from '@/redux/api/orderApi/orderApi';
 import { getUserInfo } from '@/services/auth.service';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import dayjs from 'dayjs';
 
 export default function OrdersPage() {
   const { userId } = getUserInfo() as any;
   const { data, isLoading } = useUserOrderIdQuery(userId);
-  console.log('fuck', data);
+  const deleteHandler = async (id: string) => {
+    try {
+      //   console.log(data);
+      const res = await id;
+      if (res) {
+        message.success('Order Deleted successfully');
+      }
+    } catch (err: any) {
+      //   console.error(err.message);
+      message.error(err.message);
+    }
+  };
   const columns = [
     {
       title: 'Product',
       dataIndex: 'orderProduct',
       render: function (data: any, record: any) {
         if (record.orderProduct) {
-          const productDetails = record.orderProduct.map((product: any) => {
-            return `${product.product.name} (Q: ${product.quantity})`;
-          });
-          return productDetails.join(', '); // Display all product details as a comma-separated list, adjust formatting as needed
+          const productDetails = record.orderProduct.map(
+            (product: any, index: number) => (
+              <div key={index}>
+                {product.product.name}
+                <span
+                  style={{
+                    color: 'blue',
+                    fontWeight: 'bold',
+                    marginLeft: '3px',
+                  }}
+                >
+                  (Q:{product.quantity})
+                </span>
+              </div>
+            )
+          );
+          return productDetails;
         } else {
           return 'N/A';
         }
       },
     },
+
     {
-      title: 'Phone',
+      title: 'Customer Phone',
       dataIndex: 'phone',
     },
     {
@@ -35,6 +60,11 @@ export default function OrdersPage() {
     {
       title: 'Amount',
       dataIndex: 'totalAmount',
+    },
+
+    {
+      title: 'Product Status',
+      dataIndex: 'status',
     },
     {
       title: 'Order Date',
@@ -48,7 +78,12 @@ export default function OrdersPage() {
       render: function (data: any) {
         return (
           <>
-            <Button onClick={() => {}} type="primary" danger>
+            <Button
+              onClick={() => deleteHandler(data.id)}
+              type="primary"
+              danger
+              className="mt-2"
+            >
               Cancel
             </Button>
           </>
