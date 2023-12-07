@@ -48,14 +48,13 @@ export default function OrderPage() {
 
   const products = data?.orders;
   const meta = data?.meta;
-  console.log('fdfadfad', data);
+
   const deleteHandler = async (id: string) => {
-    message.loading('Deleting.....');
     try {
       //   console.log(data);
       const res = await id;
       if (res) {
-        message.success('Offered Course Deleted successfully');
+        message.success('Order Deleted successfully');
       }
     } catch (err: any) {
       //   console.error(err.message);
@@ -71,10 +70,23 @@ export default function OrderPage() {
       dataIndex: 'orderProduct',
       render: function (data: any, record: any) {
         if (record.orderProduct) {
-          const productDetails = record.orderProduct.map((product: any) => {
-            return `${product.product.name} (Q: ${product.quantity})`;
-          });
-          return productDetails.join(', '); // Display all product details as a comma-separated list, adjust formatting as needed
+          const productDetails = record.orderProduct.map(
+            (product: any, index: number) => (
+              <div key={index}>
+                {product.product.name}
+                <span
+                  style={{
+                    color: 'blue',
+                    fontWeight: 'bold',
+                    marginLeft: '3px',
+                  }}
+                >
+                  (Q:{product.quantity})
+                </span>
+              </div>
+            )
+          );
+          return productDetails;
         } else {
           return 'N/A';
         }
@@ -92,7 +104,7 @@ export default function OrderPage() {
       dataIndex: 'phone',
     },
     {
-      title: 'Customer Name',
+      title: 'Customer Address',
       dataIndex: 'address', // Concatenating first name and last name
       render: (data: any, record: any) => {
         return `${record.address}, ${record.city}-${record.postcode}`; // Rendering first name and last name together
@@ -132,14 +144,22 @@ export default function OrderPage() {
 
         return (
           <>
-            <Select defaultValue={data.status} onChange={handleStatusChange}>
+            <Select
+              defaultValue={data.status}
+              onChange={handleStatusChange}
+              className="ml-2"
+            >
               {orderStatusOptions.map((status) => (
                 <Option key={status} value={status}>
                   {status}
                 </Option>
               ))}
             </Select>
-            <Button onClick={() => {}} type="primary" danger>
+            <Button
+              onClick={() => deleteHandler(data.id)}
+              type="primary"
+              danger
+            >
               Cancel
             </Button>
           </>

@@ -1,6 +1,6 @@
 import { Row } from 'antd';
-import loader from '../Assest/loading.gif';
 import Image from 'next/image';
+import loader from '../Assest/loading.gif';
 const Loading = () => {
   return (
     <Row
@@ -10,7 +10,7 @@ const Loading = () => {
         height: '100vh',
       }}
     >
-      <Image src={loader} alt="" style={{ color: '#1E3A8A' }}></Image>
+      <Image src={loader} alt=""></Image>
     </Row>
   );
 };
