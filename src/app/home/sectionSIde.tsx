@@ -7,7 +7,7 @@ export default function SideSection() {
             <div className="relative h-64 sm:h-80 lg:h-full">
               <img
                 alt="House"
-                src="https://plus.unsplash.com/premium_photo-1688678097506-6c12a0376238?auto=format&fit=crop&q=80&w=1998&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="https://beshop-demo.vercel.app/assets/img/info-item-img1.jpg"
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
@@ -17,23 +17,26 @@ export default function SideSection() {
             <span className="hidden lg:absolute lg:inset-y-0 lg:-start-16 lg:block lg:w-16 lg:bg-gray-100"></span>
 
             <div className="p-8 sm:p-16 lg:p-24">
-              <h2 className="text-2xl font-bold sm:text-3xl">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Tempore, debitis.
+              <h6 className="text-xl mb-1" style={{ color: '#D56587' }}>
+                Check This Out
+              </h6>
+              <h2 className="text-2xl font-bold sm:text-3xl font-sans">
+                New Collection For Delicate Skin
               </h2>
 
-              <p className="mt-4 text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aliquid, molestiae! Quidem est esse numquam odio deleniti,
-                beatae, magni dolores provident quaerat totam eos, aperiam
-                architecto eius quis quibusdam fugiat dicta.
+              <p className="mt-4 text-gray-600 font-sans">
+                Non aliqua reprehenderit reprehenderit culpa laboris nulla minim
+                anim velit adipisicing ea aliqua alluptate sit do do.Non aliqua
+                reprehenderit reprehenderit culpa laboris nulla minim anim velit
+                adipisicing ea aliqua alluptate sit do do.Non aliqua
+                reprehenderit reprehenderit culpa laboris nulla minim.
               </p>
 
               <a
                 href="#"
-                className="mt-8 inline-block rounded border border-indigo-600 bg-indigo-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                className="mt-8 inline-block rounded border border-blue-900 bg-blue-900 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
               >
-                Get in Touch
+                Shop Now
               </a>
             </div>
           </div>
