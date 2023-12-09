@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { cartAmountInfo, cartItemsInfo } from '@/services/auth.service';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 // Define the item type for the cart
 interface CartItem {
@@ -10,14 +11,20 @@ interface CartItem {
   image: string; // Add an 'image' property to store the image URL
 }
 
+const cartItemsString = localStorage.getItem('cartItems');
+const cartTotalAmount = localStorage.getItem('totalAmount');
+
+const cartItems = cartItemsString !== null ? JSON.parse(cartItemsString) : [];
+const totalAmount = cartTotalAmount !== null ? JSON.parse(cartTotalAmount) : 0;
+
 interface CartState {
   items: CartItem[];
   totalSum: number; // Add a property to store the total sum
 }
 
 const initialState: CartState = {
-  items: [],
-  totalSum: 0, // Initialize total sum as 0
+  items: cartItems,
+  totalSum: totalAmount, // Initialize total sum as 0
 };
 
 const cartSlice = createSlice({
@@ -47,7 +54,20 @@ const cartSlice = createSlice({
         (total, item) => total + (item.subtotal || 0),
         0
       );
+      // localStorage.setItem(
+      //   'cartItems',
+      //   JSON.stringify(state.items.map((item) => item))
+      // );
+      cartItemsInfo(
+        'cartItems',
+        JSON.stringify(state.items.map((item) => item))
+      );
+
+      // localStorage.setItem('totalAmount', JSON.stringify(state.totalSum));
+
+      cartAmountInfo('totalAmount', JSON.stringify(state.totalSum));
     },
+
     updateQuantity: (
       state,
       action: PayloadAction<{ id: number; quantity: number }>

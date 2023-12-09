@@ -7,7 +7,7 @@ import { IProduct } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Key, useState } from 'react';
+import { Key } from 'react';
 import { FaRegStar } from 'react-icons/fa';
 export default function ProductsList() {
   const router = useRouter();
@@ -17,7 +17,6 @@ export default function ProductsList() {
 
   const meta = data?.meta;
 
-  console.log('meta', meta);
   // console.log(meta);
   const dispatch = useAppDispatch();
 
@@ -27,7 +26,6 @@ export default function ProductsList() {
     price: any;
     image: any;
   }) => {
-    console.log('tigger');
     dispatch(
       addToCart({
         id: item.id,
@@ -276,7 +274,7 @@ export default function ProductsList() {
                 image: string | undefined;
                 name: string | number;
                 price: string | number;
-                stock:string|undefined;
+                stock: string | undefined;
               }) => (
                 <div key={product?.id}>
                   <div className="group relative block overflow-hidden">
@@ -314,7 +312,7 @@ export default function ProductsList() {
                         {product?.name}
                       </p>
 
-                      <p className='font-sans text-center'> {product?.stock}</p>
+                      <p className="font-sans text-center"> {product?.stock}</p>
                       <div className="flex items-center mb-2 mt-2 ms-10 text-yellow-500">
                         {' '}
                         <FaRegStar />

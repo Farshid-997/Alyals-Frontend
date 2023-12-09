@@ -4,20 +4,14 @@ import { removeFromCart, updateQuantity } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch, useAppSelector, useDebounced } from '@/redux/hooks';
 import { isLoggedIn, removeUserInfo } from '@/services/auth.service';
 import { Avatar, Button, Drawer, Dropdown, Menu } from 'antd';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import img1 from '../../Assest/logo.png';
 import { useState } from 'react';
-import Image from 'next/image';
-import {
-  FaBars,
-  FaBookOpen,
-  FaShoppingCart,
-  FaTimes,
-  FaUser,
-} from 'react-icons/fa';
+import { FaBars, FaShoppingCart, FaTimes, FaUser } from 'react-icons/fa';
+import img1 from '../../Assest/logo.png';
 import { authKey } from './../../constants/storageKey';
-import dynamic from 'next/dynamic';
 
 function NavbarPage() {
   const router = useRouter();
@@ -66,6 +60,7 @@ function NavbarPage() {
 
   const logOut = () => {
     removeUserInfo(authKey);
+
     router.push('/');
   };
   const items = [

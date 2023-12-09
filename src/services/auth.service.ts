@@ -1,6 +1,5 @@
 import { authKey } from '@/constants/storageKey';
 import { instance as axiosInstance } from '@/helpers/axios/axiosInstance';
-import { getBaseUrl } from '@/helpers/config/envConfig';
 import { decodedToken } from '@/utils/jwt';
 import { getFromLocalStorage, setToLocalStorage } from '@/utils/local-storage';
 
@@ -25,6 +24,22 @@ export const isLoggedIn = () => {
 };
 
 export const removeUserInfo = (key: string) => {
+  return localStorage.removeItem(key);
+};
+
+export const cartItemsInfo = (key: string, value: any) => {
+  localStorage.setItem(key, value);
+};
+
+export const cartAmountInfo = (key: string, value: any) => {
+  localStorage.setItem(key, value);
+};
+
+export const removeCartItemsInfo = (key: string) => {
+  return localStorage.removeItem(key);
+};
+
+export const removeCartAmountInfo = (key: string) => {
   return localStorage.removeItem(key);
 };
 

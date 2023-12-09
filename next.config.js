@@ -11,7 +11,8 @@ module.exports = {
       'plugins-media.makeupar.com',
       'media.licdn.com',
       'static.nike.com',
-      "art-furniture-3.myshopify.com"
+      'art-furniture-3.myshopify.com',
+      'demo2.themelexus.com',
     ], // Add your image domain here
   },
 };

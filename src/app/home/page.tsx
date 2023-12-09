@@ -1,5 +1,7 @@
 import dynamic from 'next/dynamic';
 import NewProduct from './NewProduct';
+import News from './News';
+import Offer from './Offer';
 import OfferingSection from './OfferingSection';
 import CarouselPage from './carousel';
 import Footer from './footer';
@@ -17,7 +19,8 @@ function HomePage() {
       <ProductsList />
       <NewProduct />
       <SideSection />
-      {/* <SectionPage></SectionPage> */}
+      <Offer />
+      <News />
       <Footer />
     </div>
   );
