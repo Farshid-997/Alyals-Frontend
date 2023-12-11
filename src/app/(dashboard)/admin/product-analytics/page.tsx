@@ -64,7 +64,7 @@ console.log("data", productCheckouts)
         </select>
       </div>
       <ul>
-        {productCheckouts.map((checkout) => (
+        {productCheckouts.map((checkout:any) => (
           <li key={checkout.id}>{/* Render your checkout data here */}</li>
         ))}
       </ul>
