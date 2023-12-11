@@ -2,7 +2,12 @@
 import { useProductsQuery } from '@/redux/api/adminApi/productApi';
 import { removeFromCart, updateQuantity } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch, useAppSelector, useDebounced } from '@/redux/hooks';
-import { isLoggedIn, removeUserInfo } from '@/services/auth.service';
+import {
+  isLoggedIn,
+  removeCartAmountInfo,
+  removeCartItemsInfo,
+  removeUserInfo,
+} from '@/services/auth.service';
 import { Avatar, Button, Drawer, Dropdown, Menu } from 'antd';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -11,7 +16,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaBars, FaShoppingCart, FaTimes, FaUser } from 'react-icons/fa';
 import img1 from '../../Assest/logo.png';
-import { authKey } from './../../constants/storageKey';
+import { authKey, totalAmount } from './../../constants/storageKey';
 
 function NavbarPage() {
   const router = useRouter();
@@ -58,9 +63,20 @@ function NavbarPage() {
   ];
   let [toogle, setToggle] = useState(false);
 
-  const logOut = () => {
+  const removingFromLocalStorage = () => {
+    const cartItemsValue = localStorage.getItem('cartItems');
+
+    // If the value is present, remove both the key and its associated value
+    if (cartItemsValue) {
+      removeCartItemsInfo('cartItems');
+    }
+
     removeUserInfo(authKey);
 
+    removeCartAmountInfo(totalAmount);
+  };
+  const logOut = () => {
+    removingFromLocalStorage();
     router.push('/');
   };
   const items = [
