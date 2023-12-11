@@ -1,6 +1,4 @@
 'use client';
-import Form from '@/components/froms/Form';
-import FormTextArea from '@/components/froms/FormTextArea';
 import ReusableModal from '@/components/ui/ReusableModal';
 import UMTable from '@/components/ui/UMTable';
 import { useUserbookingByIdQuery } from '@/redux/api/adminApi/bookingApi';
@@ -11,10 +9,12 @@ import '@smastrom/react-rating/style.css';
 import { Button } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import Form from '../../../../components/Froms/Form';
+import FormTextArea from '../../../../components/Froms/FormTextArea';
 export default function BookingPage() {
   const { userId } = getUserInfo() as any;
   const { data, isLoading } = useUserbookingByIdQuery(userId);
-  console.log(data);
+
   const [addReview] = useAddreviewMutation();
   const [ratings, setRatings] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);

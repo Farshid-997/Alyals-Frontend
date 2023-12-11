@@ -1,4 +1,9 @@
-import { cartAmountInfo, cartItemsInfo } from '@/services/auth.service';
+import {
+  cartAmountInfo,
+  cartItemsInfo,
+  getcartAmountInfo,
+  getcartItemsInfo,
+} from '@/services/auth.service';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 // Define the item type for the cart
@@ -11,11 +16,11 @@ interface CartItem {
   image: string; // Add an 'image' property to store the image URL
 }
 
-const cartItemsString = localStorage.getItem('cartItems');
-const cartTotalAmount = localStorage.getItem('totalAmount');
+// const cartItemsString = localStorage.getItem('cartItems');
+// const cartTotalAmount = localStorage.getItem('totalAmount');
 
-const cartItems = cartItemsString !== null ? JSON.parse(cartItemsString) : [];
-const totalAmount = cartTotalAmount !== null ? JSON.parse(cartTotalAmount) : 0;
+// const cartItems = cartItemsString !== null ? JSON.parse(cartItemsString) : [];
+// const totalAmount = cartTotalAmount !== null ? JSON.parse(cartTotalAmount) : 0;
 
 interface CartState {
   items: CartItem[];
@@ -23,8 +28,8 @@ interface CartState {
 }
 
 const initialState: CartState = {
-  items: cartItems,
-  totalSum: totalAmount, // Initialize total sum as 0
+  items: getcartItemsInfo(),
+  totalSum: getcartAmountInfo(), // Initialize total sum as 0
 };
 
 const cartSlice = createSlice({

@@ -1,4 +1,4 @@
-import { authKey } from '@/constants/storageKey';
+import { authKey, cartItems, totalAmount } from '@/constants/storageKey';
 import { instance as axiosInstance } from '@/helpers/axios/axiosInstance';
 import { decodedToken } from '@/utils/jwt';
 import { getFromLocalStorage, setToLocalStorage } from '@/utils/local-storage';
@@ -31,8 +31,28 @@ export const cartItemsInfo = (key: string, value: any) => {
   localStorage.setItem(key, value);
 };
 
+export const getcartItemsInfo = () => {
+  const items = getFromLocalStorage(cartItems);
+  if (items) {
+    const cartItems = JSON.parse(items);
+    return cartItems;
+  } else {
+    return [];
+  }
+};
+
 export const cartAmountInfo = (key: string, value: any) => {
   localStorage.setItem(key, value);
+};
+
+export const getcartAmountInfo = () => {
+  const Amount = getFromLocalStorage(totalAmount);
+  if (Amount) {
+    const totalAmount = JSON.parse(Amount);
+    return totalAmount;
+  } else {
+    return 0;
+  }
 };
 
 export const removeCartItemsInfo = (key: string) => {

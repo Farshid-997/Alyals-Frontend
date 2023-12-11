@@ -48,17 +48,17 @@ export const orderApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.order],
     }),
     // update
-updateorder: build.mutation({
-  query: (data) => {
-    console.log("LOL:", data); // Add this line to log the data
-    return {
-      url: `${order_URL}/${data.id}`,
-      method: 'PATCH',
-      data: data.body,
-    };
-  },
-  invalidatesTags: [tagTypes.order],
-}),
+    updateorder: build.mutation({
+      query: (data) => {
+        console.log('LOL:', data); // Add this line to log the data
+        return {
+          url: `${order_URL}/${data.id}`,
+          method: 'PATCH',
+          data: data.body,
+        };
+      },
+      invalidatesTags: [tagTypes.order],
+    }),
 
     // delete
     deleteorder: build.mutation({
@@ -67,6 +67,13 @@ updateorder: build.mutation({
         method: 'DELETE',
       }),
       invalidatesTags: [tagTypes.order],
+    }),
+
+    getProductCheckoutsForRange: build.query({
+      query: ({ startDate, endDate }) => ({
+        url: `${order_URL}/product-count?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`,
+        method: 'GET',
+      }),
     }),
   }),
 });
@@ -78,4 +85,5 @@ export const {
   useDeleteorderMutation,
   useUpdateorderMutation,
   useUserOrderIdQuery,
+  useGetProductCheckoutsForRangeQuery,
 } = orderApi;

@@ -32,11 +32,7 @@ export const sidebarItems = (role: string) => {
       icon: <TableOutlined />,
       key: `/${role}/manage-category`,
     },
-    // {
-    //   label: <Link href={`/${role}/manage-blog`}>Manage Blogs</Link>,
-    //   icon: <TableOutlined />,
-    //   key: `/${role}/manage-blog`,
-    // },
+   
     {
       label: <Link href={`/${role}/manage-user`}>Manage Users</Link>,
       icon: <TableOutlined />,
@@ -57,73 +53,18 @@ export const sidebarItems = (role: string) => {
       icon: <TableOutlined />,
       key: `/${role}/manage-orders`,
     },
+
+    {
+      label: <Link href={`/${role}/product-analytics`}>Product Analysis</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/product-analytics`,
+    },
   ];
 
   const adminSidebarItems: MenuProps['items'] = [
     ...defaultSidebarItems,
     ...commonAdminSidebarItems,
-    // {
-    //   label: "Manage academic",
-    //   key: "manage-academic",
-    //   icon: <TableOutlined />,
-    //   children: [
-    //     {
-    //       label: <Link href={`/${role}/academic/faculty`}>Faculties</Link>,
-    //       key: `/${role}/academic/faculty`,
-    //     },
-    //     {
-    //       label: <Link href={`/${role}/academic/department`}>Departments</Link>,
-    //       key: `/${role}/academic/department`,
-    //     },
-    //     {
-    //       label: <Link href={`/${role}/academic/semester`}>Semesters</Link>,
-    //       key: `/${role}/academic/semester`,
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "Management",
-    //   key: "management",
-    //   icon: <AppstoreOutlined />,
-    //   children: [
-    //     {
-    //       label: <Link href={`/${role}/department`}>Department</Link>,
-    //       key: `/${role}/department`,
-    //     },
-    //     {
-    //       label: <Link href={`/${role}/building`}>Building</Link>,
-    //       key: `/${role}/building`,
-    //     },
-    //     {
-    //       label: <Link href={`/${role}/room`}>Rooms</Link>,
-    //       key: `/${role}/room`,
-    //     },
-    //     {
-    //       label: <Link href={`/${role}/course`}>Course</Link>,
-    //       key: `/${role}/course`,
-    //     },
-    //     {
-    //       label: (
-    //         <Link href={`/${role}/semester-registration`}>
-    //           Semester registration
-    //         </Link>
-    //       ),
-    //       key: `/${role}/semester-registration`,
-    //     },
-    //     {
-    //       label: <Link href={`/${role}/offered-course`}>Offered courses</Link>,
-    //       key: `/${role}/offered-course`,
-    //     },
-    //     {
-    //       label: (
-    //         <Link href={`/${role}/offered-course-section`}>
-    //           Course sections
-    //         </Link>
-    //       ),
-    //       key: `/${role}/offered-course-section`,
-    //     },
-    //   ],
-    // },
+   
   ];
 
   const superAdminSidebarItems: MenuProps['items'] = [
@@ -142,11 +83,6 @@ export const sidebarItems = (role: string) => {
       label: <Link href={`/${role}/orders`}>Orders</Link>,
       icon: <TableOutlined />,
       key: `/${role}/orders`,
-    },
-    {
-      label: <Link href={`/${role}/booking`}>Booking</Link>,
-      icon: <TableOutlined />,
-      key: `/${role}/booking`,
     },
   ];
 

@@ -1,67 +1,66 @@
-"use client";
-import UMTable from "@/components/ui/UMTable";
-import { useAllreviewsQuery, useDeletereviewMutation } from "@/redux/api/adminApi/reviewApi";
+'use client';
+import UMTable from '@/components/ui/UMTable';
 import {
-  DeleteOutlined
-} from '@ant-design/icons';
-import { Button, message } from "antd";
+  useAllreviewsQuery,
+  useDeletereviewMutation,
+} from '@/redux/api/adminApi/reviewApi';
+import { DeleteOutlined } from '@ant-design/icons';
+import { Button, message } from 'antd';
 import dayjs from 'dayjs';
-import Link from "next/link";
+import Link from 'next/link';
 function ReviewPage() {
-    const query: Record<string, any> = {};
+  const query: Record<string, any> = {};
   const { data, isLoading } = useAllreviewsQuery(query);
-  console.log("fuck",data);
-  const [deletereview ] = useDeletereviewMutation();
-   const columns = [
-     {
-       title: 'User',
-       dataIndex: 'userId',
-       render: function (data: any, record: any) {
-         // Access the category name from the Category object
-         const UserEmail = record.user?.email || 'User Not Found';
-         return UserEmail;
-       },
-     },
-     {
-       title: 'Rating',
-       dataIndex: 'rating',
-     },
-     {
-       title: 'Reviews',
-       dataIndex: 'content',
-     },
-     {
-       title: 'CreatedAt',
-       dataIndex: 'createdAt',
-       render: function (data: any) {
-         return data && dayjs(data).format('MMM D, YYYY hh:mm A');
-       },
-     },
-     {
-       title: 'Action',
-       render: function (data: any) {
-         return (
-           <>
-             
-             <Button
-               onClick={() => deleteHandler(data?.id)}
-               type="primary"
-               danger
-             >
-               <DeleteOutlined />
-             </Button>
-           </>
-         );
-       },
-     },
-   ];
+  console.log('fuck', data);
+  const [deletereview] = useDeletereviewMutation();
+  const columns = [
+    {
+      title: 'User',
+      dataIndex: 'userId',
+      render: function (data: any, record: any) {
+        // Access the category name from the Category object
+        const UserEmail = record.user?.email || 'User Not Found';
+        return UserEmail;
+      },
+    },
+    {
+      title: 'Rating',
+      dataIndex: 'rating',
+    },
+    {
+      title: 'Reviews',
+      dataIndex: 'content',
+    },
+    {
+      title: 'CreatedAt',
+      dataIndex: 'createdAt',
+      render: function (data: any) {
+        return data && dayjs(data).format('MMM D, YYYY hh:mm A');
+      },
+    },
+    {
+      title: 'Action',
+      render: function (data: any) {
+        return (
+          <>
+            <Button
+              onClick={() => deleteHandler(data?.id)}
+              type="primary"
+              danger
+            >
+              <DeleteOutlined />
+            </Button>
+          </>
+        );
+      },
+    },
+  ];
 
-    const deleteHandler = async (id: string) => {
-    message.loading("Deleting.....");
+  const deleteHandler = async (id: string) => {
     try {
       //   console.log(data);
       await deletereview(id);
-      message.success("Department Deleted successfully");
+      message.success('Review Deleted successfully');
     } catch (err: any) {
       //   console.error(err.message);
       message.error(err.message);
@@ -85,4 +84,4 @@ function ReviewPage() {
   );
 }
 
-export default ReviewPage
+export default ReviewPage;

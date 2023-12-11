@@ -96,7 +96,7 @@ function BookingPage() {
     try {
       //   console.log(data);
       await deletebooking(id);
-      message.success('Department Deleted successfully');
+      message.success('Booking Deleted successfully');
     } catch (err: any) {
       //   console.error(err.message);
       message.error(err.message);

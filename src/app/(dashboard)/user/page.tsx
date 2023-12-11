@@ -1,12 +1,12 @@
 'use client';
-import Form from '@/components/froms/Form';
-import FormInput from '@/components/froms/FormInput';
 import {
   useUpdateuserMutation,
   useUserIdQuery,
 } from '@/redux/api/adminApi/userApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
+import Form from '../../../components/Froms/Form';
+import FormInput from '../../../components/Froms/FormInput';
 
 export default function UserPage() {
   const { userId } = getUserInfo() as any;
@@ -24,12 +24,11 @@ export default function UserPage() {
   };
 
   const onSubmit = async (datas: any) => {
-    message.loading('Updating.....');
     try {
       console.log('given', datas);
       const res = await updateUser({ id, body: datas });
       console.log(res);
-      message.success('Department added successfully');
+      message.success('Profile Updated successfully');
     } catch (err: any) {
       console.error(err.message);
       message.error(err.message);

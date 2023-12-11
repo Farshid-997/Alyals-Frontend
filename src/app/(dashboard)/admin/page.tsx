@@ -7,14 +7,15 @@ import {
 } from '@/redux/api/adminApi/userApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
-import Form from './../../../components/froms/Form';
+
+import Form from '../../../components/Froms/Form';
 import FormInput from '../../../components/Froms/FormInput';
 
 export default function AdminPage() {
   const { userId } = getUserInfo() as any;
   const { data } = useUserIdQuery(userId);
   const id = data?.id;
-  console.log(data);
+  
   const [updateUser] = useUpdateuserMutation();
 
   const defaultValues = {
@@ -28,10 +29,10 @@ export default function AdminPage() {
   const onSubmit = async (datas: any) => {
     message.loading('Updating.....');
     try {
-      console.log('given', datas);
+    
       const res = await updateUser({ id, body: datas });
       console.log(res);
-      message.success('User Updated successfully');
+      message.success('Admin Profile Updated successfully');
     } catch (err: any) {
       console.error(err.message);
       message.error(err.message);

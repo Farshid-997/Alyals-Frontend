@@ -1,4 +1,3 @@
-import { tagTypes } from '@/redux/tag-types';
 import { baseApi } from '../baseApi';
 
 const review_URL = '/reviews';
@@ -11,7 +10,7 @@ export const reviewApi = baseApi.injectEndpoints({
         method: 'GET',
         params: arg,
       }),
-      providesTags: [tagTypes.review],
+      // providesTags: [tagTypes.review],
     }),
 
     // get single review
@@ -20,7 +19,7 @@ export const reviewApi = baseApi.injectEndpoints({
         url: `${review_URL}/${id}`,
         method: 'GET',
       }),
-      providesTags: [tagTypes.review],
+      // providesTags: [tagTypes.review],
     }),
     // create a new review
     addreview: build.mutation({
@@ -29,7 +28,7 @@ export const reviewApi = baseApi.injectEndpoints({
         method: 'POST',
         data,
       }),
-      invalidatesTags: [tagTypes.review],
+      // invalidatesTags: [tagTypes.review],
     }),
     // update review
     updatereview: build.mutation({
@@ -38,7 +37,7 @@ export const reviewApi = baseApi.injectEndpoints({
         method: 'PATCH',
         data: data.body,
       }),
-      invalidatesTags: [tagTypes.review],
+      // invalidatesTags: [tagTypes.review],
     }),
     // delete review
     deletereview: build.mutation({
@@ -46,7 +45,7 @@ export const reviewApi = baseApi.injectEndpoints({
         url: `${review_URL}/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [tagTypes.review],
+      // invalidatesTags: [tagTypes.review],
     }),
   }),
 });
