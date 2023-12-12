@@ -71,8 +71,9 @@ export const orderApi = baseApi.injectEndpoints({
 
     getProductCheckoutsForRange: build.query({
       query: ({ startDate, endDate }) => ({
-        url: `${order_URL}/product-count?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`,
+        url: `${order_URL}/product-count`,
         method: 'GET',
+        body: { startDate, endDate },
       }),
     }),
   }),

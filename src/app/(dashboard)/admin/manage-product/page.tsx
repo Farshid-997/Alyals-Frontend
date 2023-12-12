@@ -44,7 +44,7 @@ export default function ProductPage() {
 
   const products = data?.products;
   const meta = data?.meta;
-  console.log('fdfadfad', products);
+
   const deleteHandler = async (id: string) => {
     try {
       //   console.log(data);

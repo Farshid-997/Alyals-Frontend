@@ -9,7 +9,7 @@ export const baseApi = createApi({
   // }),
 
   baseQuery: axiosBaseQuery({
-    baseUrl: 'http://localhost:7000/api/v1',
+    baseUrl: 'http://localhost:5000/api/v1',
   }),
   endpoints: () => ({}),
   tagTypes: [

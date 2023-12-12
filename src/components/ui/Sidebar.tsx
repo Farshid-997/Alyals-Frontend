@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { sidebarItems } from '@/constants/sidebarItems';
 import { getUserInfo } from '@/services/auth.service';
-
+import Link from 'next/link';
 const { Sider } = Layout;
 
 const SideBar = () => {
@@ -40,7 +40,7 @@ const SideBar = () => {
           padding: '10px 0px',
         }}
       >
-        Alyals
+        <Link href="/">Alyals</Link>
       </div>
       <Menu
         theme="dark"

@@ -1,74 +1,62 @@
 // pages/index.js
 'use client';
-import Loading from '@/app/loading';
 import { useGetProductCheckoutsForRangeQuery } from '@/redux/api/orderApi/orderApi';
-import { ChangeEvent, Key, useState } from 'react';
+import { useState } from 'react';
+
 
 function ProductAnalysis() {
-  const [selectedRange, setSelectedRange] = useState<RangeOption>('today');
-  type RangeOption = 'today' | 'last7days';
 
-  const handleRangeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedRange(event.target.value as RangeOption);
-  };
-
-  const {
-    data: productCheckouts,
-    isLoading,
-    isError,
-  } = useGetProductCheckoutsForRangeQuery({
-    startDate: getStartDate(selectedRange).toISOString(),
-    endDate: getEndDate(selectedRange).toISOString(),
-  });
-console.log("data", productCheckouts)
-  
-  function getStartDate(range: RangeOption) {
-    // Implement logic to determine the start date based on the selected range
-    if (range === 'today') {
-      return new Date();
-    } else if (range === 'last7days') {
-      const today = new Date();
-      return new Date(today.setDate(today.getDate() - 7));
-    } else {
-      return new Date();
-    }
-  }
-
-  function getEndDate(range: RangeOption): Date {
-    // Implement logic to determine the end date based on the selected range
-    return new Date();
-  }
-
- if (isLoading) {
-    return (
-        <>
-            <Loading />
-        </>
-    );
-}
+ const [startDate, setStartDate] = useState('');
+ const [endDate, setEndDate] = useState('');
+  // const query: Record<string, any> = {};
+ const { data, isLoading, error } = useGetProductCheckoutsForRangeQuery({
+   startDate,
+   endDate,
+ });
 
 
-  if (isError) {
-    return <div>Error loading data</div>;
-  }
+  console.log(data);
+
+ 
 
   return (
-    <div>
-      <h1>Product Checkouts</h1>
+    <>
       <div>
-        <label>Select Date Range:</label>
-        <select value={selectedRange} onChange={handleRangeChange}>
-          <option value="today">Today</option>
-          <option value="last7days">Last 7 Days</option>
-          {/* Add more options as needed */}
-        </select>
+        <h1>Order Count</h1>
+
+        <div>
+          <label htmlFor="startDate">Start Date:</label>
+          <input
+            type="date"
+            id="startDate"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="endDate">End Date:</label>
+          <input
+            type="date"
+            id="endDate"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
+
+       
+
+        {isLoading && <p>Loading...</p>}
+        
+        {data && (
+          <div>
+            <p>Last 7 Days: {data?.createdAt}</p>
+            <p>Last 1 Month: {data.last1MonthCount}</p>
+            <p>Selected Date Range: {data.selectedDateRangeCount}</p>
+          </div>
+        )}
       </div>
-      <ul>
-        {productCheckouts.map((checkout:any) => (
-          <li key={checkout.id}>{/* Render your checkout data here */}</li>
-        ))}
-      </ul>
-    </div>
+    </>
   );
 }
 
