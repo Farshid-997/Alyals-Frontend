@@ -3,6 +3,7 @@ import { useAddorderMutation } from '@/redux/api/orderApi/orderApi';
 import { useAppSelector } from '@/redux/hooks';
 import { getUserInfo } from '@/services/auth.service';
 import { message } from 'antd';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import Footer from '../home/footer';
@@ -26,7 +27,7 @@ const CheckoutPage = () => {
     data.totalAmount = totalAmount;
     data.status = 'pending';
     const res = await addOrder(data).unwrap();
-    if (res.id) {
+    if (res?.id) {
       message.success('Order placed successfully');
       router.push('/');
     }
@@ -352,4 +353,5 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
+
+export default dynamic(() => Promise.resolve(CheckoutPage), { ssr: false });

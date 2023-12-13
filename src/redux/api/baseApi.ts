@@ -17,7 +17,7 @@ export const baseApi = createApi({
     'service',
     'users',
     'booking',
-    'reviews',
+    'review',
     'product',
     'order',
   ],

@@ -10,7 +10,7 @@ export const orderApi = baseApi.injectEndpoints({
     orders: build.query({
       query: (arg: Record<string, any>) => {
         return {
-          url: order_URL,
+          url: `${order_URL}`,
           method: 'GET',
           params: arg,
         };
@@ -41,7 +41,7 @@ export const orderApi = baseApi.injectEndpoints({
     // create
     addorder: build.mutation({
       query: (data) => ({
-        url: `${order_URL}`,
+        url: `${order_URL}/create-order`,
         method: 'POST',
         data,
       }),
@@ -70,11 +70,21 @@ export const orderApi = baseApi.injectEndpoints({
     }),
 
     getProductCheckoutsForDay: build.query({
-      query: () => ({
-        url: `${order_URL}/product-count`,
+      query: (arg) => ({
+        url: `${order_URL}/order-count`,
         method: 'GET',
-        
+        params: arg,
       }),
+      providesTags: [tagTypes.order],
+    }),
+
+    getProductCheckoutsForWeek: build.query({
+      query: (arg) => ({
+        url: `${order_URL}/order-count-week`,
+        method: 'GET',
+        params: arg,
+      }),
+      providesTags: [tagTypes.order],
     }),
   }),
 });
@@ -86,5 +96,6 @@ export const {
   useDeleteorderMutation,
   useUpdateorderMutation,
   useUserOrderIdQuery,
- useGetProductCheckoutsForDayQuery
+ useGetProductCheckoutsForDayQuery,
+useGetProductCheckoutsForWeekQuery
 } = orderApi;
