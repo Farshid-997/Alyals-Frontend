@@ -1,6 +1,6 @@
 // pages/index.js
 'use client';
-import { useGetProductCheckoutsForRangeQuery } from '@/redux/api/orderApi/orderApi';
+import { useGetProductCheckoutsForDayQuery } from '@/redux/api/orderApi/orderApi';
 import { useState } from 'react';
 
 
@@ -9,13 +9,10 @@ function ProductAnalysis() {
  const [startDate, setStartDate] = useState('');
  const [endDate, setEndDate] = useState('');
   // const query: Record<string, any> = {};
- const { data, isLoading, error } = useGetProductCheckoutsForRangeQuery({
-   startDate,
-   endDate,
- });
+ const { data, isLoading, error } = useGetProductCheckoutsForDayQuery({});
 
 
-  console.log(data);
+  
 
  
 

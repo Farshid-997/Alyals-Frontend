@@ -69,11 +69,11 @@ export const orderApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.order],
     }),
 
-    getProductCheckoutsForRange: build.query({
-      query: ({ startDate, endDate }) => ({
+    getProductCheckoutsForDay: build.query({
+      query: () => ({
         url: `${order_URL}/product-count`,
         method: 'GET',
-        body: { startDate, endDate },
+        
       }),
     }),
   }),
@@ -86,5 +86,5 @@ export const {
   useDeleteorderMutation,
   useUpdateorderMutation,
   useUserOrderIdQuery,
-  useGetProductCheckoutsForRangeQuery,
+ useGetProductCheckoutsForDayQuery
 } = orderApi;
