@@ -75,10 +75,12 @@ function NavbarPage() {
 
     removeCartAmountInfo(totalAmount);
   };
+
   const logOut = () => {
     removingFromLocalStorage();
     router.push('/');
   };
+
   const items = [
     {
       key: '0',

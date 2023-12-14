@@ -78,14 +78,7 @@ export const orderApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.order],
     }),
 
-    getProductCheckoutsForWeek: build.query({
-      query: (arg) => ({
-        url: `${order_URL}/order-count-week`,
-        method: 'GET',
-        params: arg,
-      }),
-      providesTags: [tagTypes.order],
-    }),
+   
   }),
 });
 
@@ -97,5 +90,5 @@ export const {
   useUpdateorderMutation,
   useUserOrderIdQuery,
  useGetProductCheckoutsForDayQuery,
-useGetProductCheckoutsForWeekQuery
+
 } = orderApi;

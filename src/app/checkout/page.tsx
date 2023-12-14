@@ -1,7 +1,7 @@
 'use client';
 import { useAddorderMutation } from '@/redux/api/orderApi/orderApi';
 import { useAppSelector } from '@/redux/hooks';
-import { getUserInfo } from '@/services/auth.service';
+import { getUserInfo, removeCartAmountInfo, removeCartItemsInfo } from '@/services/auth.service';
 import { message } from 'antd';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
@@ -27,8 +27,24 @@ const CheckoutPage = () => {
     data.totalAmount = totalAmount;
     data.status = 'pending';
     const res = await addOrder(data).unwrap();
+
+    const removingFromLocalStorage = () => {
+      const cartItemsValue = localStorage.getItem('cartItems');
+
+      // If the value is present, remove both the key and its associated value
+      if (cartItemsValue) {
+        removeCartItemsInfo('cartItems');
+      }
+
+      
+
+      removeCartAmountInfo("totalAmount");
+    };
+
     if (res?.id) {
       message.success('Order placed successfully');
+      removingFromLocalStorage()
+      
       router.push('/');
     }
   };

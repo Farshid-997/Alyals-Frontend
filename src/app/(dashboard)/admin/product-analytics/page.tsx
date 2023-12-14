@@ -1,6 +1,6 @@
 'use client';
 import Loading from '@/app/loading';
-import { useGetProductCheckoutsForDayQuery, useGetProductCheckoutsForWeekQuery } from '@/redux/api/orderApi/orderApi';
+import { useGetProductCheckoutsForDayQuery } from '@/redux/api/orderApi/orderApi';
 import Chart from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
 interface ProductItem {
@@ -13,8 +13,7 @@ function ProductAnalysis() {
   const { data, error, isLoading } = useGetProductCheckoutsForDayQuery({});
 
   
-const { data:p } = useGetProductCheckoutsForWeekQuery({});
-  console.log(p);
+
 
   const createChart = (data: ProductItem[]) => {
     const ctx = chartRef?.current?.getContext('2d');

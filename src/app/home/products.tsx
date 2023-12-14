@@ -12,12 +12,12 @@ import { FaRegStar } from 'react-icons/fa';
 export default function ProductsList() {
   const router = useRouter();
   const { data } = useProductsQuery({});
-  console.log('data', data);
+ 
   const products = data?.products || [];
 
   const meta = data?.meta;
 
-  // console.log(meta);
+  console.log(meta);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = (item: {
@@ -45,7 +45,7 @@ export default function ProductsList() {
           </h2>
         </header>
 
-        {/* <div className="mt-8 sm:flex sm:items-center sm:justify-between">
+        <div className="mt-8 sm:flex sm:items-center sm:justify-between">
           <div className="block sm:hidden">
             <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
               <span className="text-sm font-medium"> Filters & Sorting </span>
@@ -256,7 +256,9 @@ export default function ProductsList() {
             </select>
           </div>
         </div>
-        <div className="flex items-center mt-2">
+
+        
+        {/* <div className="flex items-center mt-2">
           <p className="me-2 text-sm  cursor-pointer">ALL</p>
           <p className="me-2 text-sm  cursor-pointer">DEAR KLAIRS</p>
           <p className="me-2 text-sm  cursor-pointer">BY WISHTREND</p>
