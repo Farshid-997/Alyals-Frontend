@@ -6,18 +6,51 @@ import { IProduct } from '@/types';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Key } from 'react';
+import { Key, useState } from 'react';
 import { FaRegStar } from 'react-icons/fa';
 export default function ProductsList() {
-  const router = useRouter();
-  const { data } = useProductsQuery({});
- 
-  const products = data?.products || [];
+    const [minPrice, setMinPrice] = useState<string>('');
+    const [maxPrice, setMaxPrice] = useState<string>('');
 
-  const meta = data?.meta;
 
-  console.log(meta);
+   const [productstate, setProductstate] = useState<string >('');
+
+   
+   const query: Record<string, any> = {};
+
+  
+  
+
+   if (!!minPrice && !!maxPrice) {
+      query['minPrice'] = minPrice;
+      query['maxPrice'] = maxPrice;
+    }
+
+     if (!!productstate) {
+       query['productstate'] = productstate;
+     }
+   const { data: allProductsData, refetch: refetchAllProducts } =useProductsQuery({...query});
+
+
+
+  const { data: filteredProductsData, refetch: refetchFilteredProducts } =useProductsQuery({ maxPrice, minPrice,});
+
+  const products =
+    filteredProductsData?.products || allProductsData?.products ;
+
+
+    console.log("products",products)
+   const handleResetFilters = async () => {
+   
+      setMinPrice('');
+      setMaxPrice('');
+     refetchAllProducts();
+     refetchFilteredProducts();
+    };
+
+   
+  
+  
   const dispatch = useAppDispatch();
 
   const handleAddToCart = (item: {
@@ -102,6 +135,7 @@ export default function ProductsList() {
                       <button
                         type="button"
                         className="text-sm text-gray-900 underline underline-offset-4"
+                        onClick={handleResetFilters}
                       >
                         Reset
                       </button>
@@ -117,27 +151,14 @@ export default function ProductsList() {
                             type="checkbox"
                             id="FilterInStock"
                             className="h-5 w-5 rounded border-gray-300"
+                            value={productstate}
+                            onChange={(e) => {
+                              setProductstate(e.target.value);
+                            }}
                           />
 
                           <span className="text-sm font-medium text-gray-700">
                             In Stock (5+)
-                          </span>
-                        </label>
-                      </li>
-
-                      <li>
-                        <label
-                          htmlFor="FilterPreOrder"
-                          className="inline-flex items-center gap-2"
-                        >
-                          <input
-                            type="checkbox"
-                            id="FilterPreOrder"
-                            className="h-5 w-5 rounded border-gray-300"
-                          />
-
-                          <span className="text-sm font-medium text-gray-700">
-                            Pre Order (3+)
                           </span>
                         </label>
                       </li>
@@ -191,12 +212,13 @@ export default function ProductsList() {
                   <div className="w-96 rounded border border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
                       <span className="text-sm text-gray-700">
-                        The highest price is $600
+                        select your price range
                       </span>
 
                       <button
                         type="button"
                         className="text-sm text-gray-900 underline underline-offset-4"
+                        onClick={handleResetFilters}
                       >
                         Reset
                       </button>
@@ -208,13 +230,17 @@ export default function ProductsList() {
                           htmlFor="FilterPriceFrom"
                           className="flex items-center gap-2"
                         >
-                          <span className="text-sm text-gray-600">$</span>
+                          <span className="text-sm text-gray-600">Min</span>
 
                           <input
                             type="number"
                             id="FilterPriceFrom"
                             placeholder="From"
-                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-1"
+                            value={minPrice}
+                            onChange={(e) => {
+                              setMinPrice(e.target.value);
+                            }}
                           />
                         </label>
 
@@ -222,13 +248,17 @@ export default function ProductsList() {
                           htmlFor="FilterPriceTo"
                           className="flex items-center gap-2"
                         >
-                          <span className="text-sm text-gray-600">$</span>
+                          <span className="text-sm text-gray-600">Max</span>
 
                           <input
                             type="number"
                             id="FilterPriceTo"
                             placeholder="To"
-                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-1"
+                            value={maxPrice}
+                            onChange={(e) => {
+                              setMaxPrice(e.target.value);
+                            }}
                           />
                         </label>
                       </div>
@@ -257,13 +287,7 @@ export default function ProductsList() {
           </div>
         </div>
 
-        
-        {/* <div className="flex items-center mt-2">
-          <p className="me-2 text-sm  cursor-pointer">ALL</p>
-          <p className="me-2 text-sm  cursor-pointer">DEAR KLAIRS</p>
-          <p className="me-2 text-sm  cursor-pointer">BY WISHTREND</p>
-          <p className="me-2 text-sm  cursor-pointer">I'M FROM</p>
-        </div> */}
+       
 
         <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5 font-sans">
           {products

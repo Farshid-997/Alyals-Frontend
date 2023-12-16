@@ -21,6 +21,7 @@ import { authKey, totalAmount } from './../../constants/storageKey';
 function NavbarPage() {
   const router = useRouter();
   const userLoggedIn = isLoggedIn();
+ 
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedTerm = useDebounced({

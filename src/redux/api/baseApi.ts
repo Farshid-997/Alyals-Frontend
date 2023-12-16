@@ -20,5 +20,6 @@ export const baseApi = createApi({
     'review',
     'product',
     'order',
+    'brand'
   ],
 });

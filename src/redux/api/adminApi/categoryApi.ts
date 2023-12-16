@@ -7,10 +7,10 @@ export const categoryApi = baseApi.injectEndpoints({
     allcategorys: build.query({
       query: (arg) => ({
         url: `${category_URL}`,
-        method: 'GET', // Use one of the allowed HTTP methods
+        method: 'GET', 
         params: arg,
       }),
-      // providesTags: [tagTypes.category],
+      
     }),
 
     // get single category
@@ -19,7 +19,7 @@ export const categoryApi = baseApi.injectEndpoints({
         url: `${category_URL}/${id}`,
         method: 'GET',
       }),
-      // providesTags: [tagTypes.category],
+     
     }),
     // create a new category
     addcategory: build.mutation({
@@ -28,7 +28,7 @@ export const categoryApi = baseApi.injectEndpoints({
         method: 'POST',
         data,
       }),
-      //    providesTags: [tagTypes.category],
+     
     }),
     // update category
     updatecategory: build.mutation({
@@ -37,7 +37,7 @@ export const categoryApi = baseApi.injectEndpoints({
         method: 'PATCH',
         data: data.body,
       }),
-      //  providesTags: [tagTypes.category],
+     
     }),
     // delete category
     deletecategory: build.mutation({
@@ -45,7 +45,7 @@ export const categoryApi = baseApi.injectEndpoints({
         url: `${category_URL}/${id}`,
         method: 'DELETE',
       }),
-      //  providesTags: [tagTypes.category],
+     
     }),
   }),
 });
