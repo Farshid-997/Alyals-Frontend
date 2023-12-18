@@ -12,14 +12,15 @@ export const brandApi = baseApi.injectEndpoints({
       }),
     }),
 
-    // get single category
+    // get single brand
     brandId: build.query({
       query: (id: string | string[] | undefined) => ({
         url: `${brand_URL}/${id}`,
         method: 'GET',
       }),
     }),
-    // create a new category
+
+    // create a new brand
     addbrand: build.mutation({
       query: (data) => ({
         url: `${brand_URL}/create-brand`,
@@ -27,7 +28,8 @@ export const brandApi = baseApi.injectEndpoints({
         data,
       }),
     }),
-    // update category
+
+    // update brand
     updatebrand: build.mutation({
       query: (data) => ({
         url: `${brand_URL}/${data.id}`,
@@ -35,7 +37,9 @@ export const brandApi = baseApi.injectEndpoints({
         data: data.body,
       }),
     }),
-    // delete category
+
+    
+    // delete brand
     deletebrand: build.mutation({
       query: (id) => ({
         url: `${brand_URL}/${id}`,

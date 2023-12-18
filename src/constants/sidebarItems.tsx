@@ -32,7 +32,13 @@ export const sidebarItems = (role: string) => {
       icon: <TableOutlined />,
       key: `/${role}/manage-category`,
     },
-   
+
+    {
+      label: <Link href={`/${role}/manage-brand`}>Manage Brand</Link>,
+      icon: <TableOutlined />,
+      key: `/${role}/manage-brand`,
+    },
+
     {
       label: <Link href={`/${role}/manage-user`}>Manage Users</Link>,
       icon: <TableOutlined />,
@@ -43,7 +49,7 @@ export const sidebarItems = (role: string) => {
       icon: <TableOutlined />,
       key: `/${role}/manage-review`,
     },
-    
+
     {
       label: <Link href={`/${role}/manage-orders`}>Manage Orders</Link>,
       icon: <TableOutlined />,
