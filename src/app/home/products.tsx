@@ -29,14 +29,15 @@ export default function ProductsList() {
      if (!!productstate) {
        query['productstate'] = productstate;
      }
-   const { data: allProductsData, refetch: refetchAllProducts } =useProductsQuery({...query});
+   const { data: allProductsData, refetch: refetchAllProducts } =useProductsQuery({query});
 
 
+   console.log(query)
 
-  const { data: filteredProductsData, refetch: refetchFilteredProducts } =useProductsQuery({ maxPrice, minPrice,});
+  // const { data: filteredProductsData, refetch: refetchFilteredProducts } =useProductsQuery({ maxPrice, minPrice,});
 
   const products =
-    filteredProductsData?.products || allProductsData?.products ;
+    allProductsData?.products ;
 
 
     console.log("products",products)
@@ -45,7 +46,7 @@ export default function ProductsList() {
       setMinPrice('');
       setMaxPrice('');
      refetchAllProducts();
-     refetchFilteredProducts();
+     
     };
 
    
