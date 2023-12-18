@@ -9,49 +9,45 @@ import Link from 'next/link';
 import { Key, useState } from 'react';
 import { FaRegStar } from 'react-icons/fa';
 export default function ProductsList() {
-    const [minPrice, setMinPrice] = useState<string>('');
-    const [maxPrice, setMaxPrice] = useState<string>('');
+  const [minPrice, setMinPrice] = useState<string>('');
+  const [maxPrice, setMaxPrice] = useState<string>('');
+  const [inStock, setInStock] = useState<boolean>(false);
+  const [outOfStock, setOutOfStock] = useState<boolean>(false);
 
+  const query: Record<string, any> = {};
 
-   const [productstate, setProductstate] = useState<string >('');
+  const { data: productsData } = useProductsQuery({
+    ...(minPrice || maxPrice
+      ? { minPrice: parseFloat(minPrice), maxPrice: parseFloat(maxPrice) }
+      : {}),
+    stock: inStock ? 'in-stock' : outOfStock ? 'out-stock' : undefined,
+  });
 
-   
-   const query: Record<string, any> = {};
+  if (!!minPrice && !!maxPrice) {
+    query['minPrice'] = minPrice;
+    query['maxPrice'] = maxPrice;
+  }
 
-  
-  
+  if (inStock) {
+    query['inStock'] = inStock;
+  }
 
-   if (!!minPrice && !!maxPrice) {
-      query['minPrice'] = minPrice;
-      query['maxPrice'] = maxPrice;
-    }
+  if (outOfStock) {
+    query['outOfStock'] = outOfStock;
+  }
 
-     if (!!productstate) {
-       query['productstate'] = productstate;
-     }
-   const { data: allProductsData, refetch: refetchAllProducts } =useProductsQuery({query});
+  console.log('query', query);
+  const products = productsData?.products || [];
 
+  const resetStockFilterData = () => {
+    setInStock(false);
+    setOutOfStock(false);
+  };
 
-   console.log(query)
-
-  // const { data: filteredProductsData, refetch: refetchFilteredProducts } =useProductsQuery({ maxPrice, minPrice,});
-
-  const products =
-    allProductsData?.products ;
-
-
-    console.log("products",products)
-   const handleResetFilters = async () => {
-   
-      setMinPrice('');
-      setMaxPrice('');
-     refetchAllProducts();
-     
-    };
-
-   
-  
-  
+  const resetFilterData = () => {
+    setMaxPrice('');
+    setMinPrice('');
+  };
   const dispatch = useAppDispatch();
 
   const handleAddToCart = (item: {
@@ -80,27 +76,6 @@ export default function ProductsList() {
         </header>
 
         <div className="mt-8 sm:flex sm:items-center sm:justify-between">
-          <div className="block sm:hidden">
-            <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-              <span className="text-sm font-medium"> Filters & Sorting </span>
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="h-4 w-4 rtl:rotate-180"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
-          </div>
-
           <div className="hidden sm:flex sm:gap-4">
             <div className="relative">
               <details className="group [&_summary::-webkit-details-marker]:hidden">
@@ -130,13 +105,13 @@ export default function ProductsList() {
                     <header className="flex items-center justify-between p-4">
                       <span className="text-sm text-gray-700">
                         {' '}
-                        0 Selected{' '}
+                        Select Checkbox
                       </span>
 
                       <button
                         type="button"
                         className="text-sm text-gray-900 underline underline-offset-4"
-                        onClick={handleResetFilters}
+                        onClick={resetStockFilterData}
                       >
                         Reset
                       </button>
@@ -152,14 +127,14 @@ export default function ProductsList() {
                             type="checkbox"
                             id="FilterInStock"
                             className="h-5 w-5 rounded border-gray-300"
-                            value={productstate}
+                            checked={inStock}
                             onChange={(e) => {
-                              setProductstate(e.target.value);
+                              setInStock(e.target.checked);
                             }}
                           />
 
                           <span className="text-sm font-medium text-gray-700">
-                            In Stock (5+)
+                            In Stock
                           </span>
                         </label>
                       </li>
@@ -173,10 +148,14 @@ export default function ProductsList() {
                             type="checkbox"
                             id="FilterOutOfStock"
                             className="h-5 w-5 rounded border-gray-300"
+                            checked={outOfStock}
+                            onChange={(e) => {
+                              setOutOfStock(e.target.checked);
+                            }}
                           />
 
                           <span className="text-sm font-medium text-gray-700">
-                            Out of Stock (10+)
+                            Out of Stock
                           </span>
                         </label>
                       </li>
@@ -213,13 +192,13 @@ export default function ProductsList() {
                   <div className="w-96 rounded border border-gray-200 bg-white">
                     <header className="flex items-center justify-between p-4">
                       <span className="text-sm text-gray-700">
-                        select your price range
+                        Select the price
                       </span>
 
                       <button
                         type="button"
                         className="text-sm text-gray-900 underline underline-offset-4"
-                        onClick={handleResetFilters}
+                        onClick={resetFilterData}
                       >
                         Reset
                       </button>
@@ -236,8 +215,8 @@ export default function ProductsList() {
                           <input
                             type="number"
                             id="FilterPriceFrom"
-                            placeholder="From"
-                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-1"
+                            placeholder="Min Price"
+                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3"
                             value={minPrice}
                             onChange={(e) => {
                               setMinPrice(e.target.value);
@@ -254,8 +233,8 @@ export default function ProductsList() {
                           <input
                             type="number"
                             id="FilterPriceTo"
-                            placeholder="To"
-                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-1"
+                            placeholder="Max Price"
+                            className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm p-3"
                             value={maxPrice}
                             onChange={(e) => {
                               setMaxPrice(e.target.value);
@@ -270,7 +249,7 @@ export default function ProductsList() {
             </div>
           </div>
 
-          <div className="hidden sm:block">
+          {/* <div className="hidden sm:block">
             <label htmlFor="SortBy" className="sr-only">
               SortBy
             </label>
@@ -285,10 +264,8 @@ export default function ProductsList() {
               <option value="Price, DESC">Price, DESC</option>
               <option value="Price, ASC">Price, ASC</option>
             </select>
-          </div>
+          </div> */}
         </div>
-
-       
 
         <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5 font-sans">
           {products

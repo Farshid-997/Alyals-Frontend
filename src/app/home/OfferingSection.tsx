@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function OfferingSection() {
   return (
-    <div className="flex flex-col justify-between md:flex-row bg-[#5EC4DE] rounded-md mt-14 mb-7 max-w-screen-xl p-10">
+    <div className="flex flex-col justify-between md:flex-row bg-[#DF7B56] rounded-md mt-14 mb-7 max-w-screen-xl p-10">
       <div className="flex items-center mb-4 md:mb-0 ">
         <Image
           src="https://art-furniture-3.myshopify.com/cdn/shop/files/2_2d88b772-fb81-4764-9c06-12c393cba637.png?v=1618739040"
