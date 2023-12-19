@@ -4,10 +4,9 @@ import { addToCart } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch } from '@/redux/hooks';
 import { IProduct } from '@/types';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Key, useState } from 'react';
+import { Key } from 'react';
 import { FaRegStar } from 'react-icons/fa';
 export default function NewProduct() {
   const router = useRouter();
@@ -103,7 +102,7 @@ export default function NewProduct() {
                         ৳ {product?.price}
                       </p>
 
-                      <p
+                      {/* <p
                         className="text-black-500 text-center hover:text-red-900 cursor-pointer font-bold font-sans"
                         onClick={() => {
                           handleAddToCart(product);
@@ -111,7 +110,7 @@ export default function NewProduct() {
                       >
                         {' '}
                         ADD to Cart
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>

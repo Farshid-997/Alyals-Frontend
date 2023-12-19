@@ -13,6 +13,10 @@ module.exports = {
       'static.nike.com',
       'art-furniture-3.myshopify.com',
       'demo2.themelexus.com',
-    ], // Add your image domain here
+      'cdn-icons-png.flaticon.com',
+      'en.gliamicidipierrot.com',
+      'cdn.vectorstock.com',
+      'static.helpjuice.com'
+    ],
   },
 };
