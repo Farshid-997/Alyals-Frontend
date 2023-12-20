@@ -69,7 +69,7 @@ export default function ProductsList() {
   };
   return (
     <section>
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 mt-8">
         <header>
           <h2 className="text-xl font-bold text-gray-900 sm:text-3xl text-center font-sans mt-10 mb-10">
             Product Collection
@@ -251,7 +251,7 @@ export default function ProductsList() {
           </div>
         </div>
 
-        <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-5 font-sans my-14">
+        <div className=" grid gap-5 sm:grid-cols-2 lg:grid-cols-5 font-sans mt-8">
           {products
             ?.filter(
               (p: IProduct | null | undefined) => p?.productstate === 'normal'
@@ -264,7 +264,7 @@ export default function ProductsList() {
                 price: string | number;
                 stock: string | undefined;
               }) => (
-                <div key={product?.id} className="group relative">
+                <div key={product?.id} className="group relative my-8">
                   <div className="block relative overflow-hidden">
                     <button className="absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
                       <span className="sr-only font-sans">Wishlist</span>
@@ -320,14 +320,7 @@ export default function ProductsList() {
                             />
                           </div>
 
-                          {/* <h5
-                              className=" text-center  cursor-pointer font-bold font-sans shadow-md  p-2 mt-6 text-xl text-[#3D0C02] border-none "
-                              onClick={() => {
-                                handleAddToCart(product);
-                              }}
-                            >
-                              Add To Cart
-                            </h5> */}
+                         
                         </div>
                       </div>
                     </div>

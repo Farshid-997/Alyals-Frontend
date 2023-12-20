@@ -1,39 +1,36 @@
 'use client';
 import { useProductsQuery } from '@/redux/api/adminApi/productApi';
-import { addToCart } from '@/redux/api/cartApi/cartApi';
-import { useAppDispatch } from '@/redux/hooks';
 import { IProduct } from '@/types';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Key } from 'react';
 import { FaRegStar } from 'react-icons/fa';
 export default function NewProduct() {
-  const router = useRouter();
+  // const router = useRouter();
   const { data } = useProductsQuery({});
 
   const products = data?.products || [];
-  const meta = data?.meta;
+  // const meta = data?.meta;
 
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const handleAddToCart = (item: {
-    id: any;
-    name: any;
-    price: any;
-    image: any;
-  }) => {
-    console.log('tigger');
-    dispatch(
-      addToCart({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        quantity: 1,
-      })
-    );
-  };
+  // const handleAddToCart = (item: {
+  //   id: any;
+  //   name: any;
+  //   price: any;
+  //   image: any;
+  // }) => {
+  //   console.log('tigger');
+  //   dispatch(
+  //     addToCart({
+  //       id: item.id,
+  //       name: item.name,
+  //       price: item.price,
+  //       image: item.image,
+  //       quantity: 1,
+  //     })
+  //   );
+  // };
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -56,7 +53,7 @@ export default function NewProduct() {
                 price: string | number;
               }) => (
                 <div key={product?.id}>
-                  <div className="group relative block overflow-hidden">
+                  <div className="group relative block overflow-hidden mt-6">
                     <button className=" font-sans absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
                       <span className="sr-only font-sans">Wishlist</span>
 
