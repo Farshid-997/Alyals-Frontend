@@ -4,7 +4,6 @@ import { useProductsQuery } from '@/redux/api/adminApi/productApi';
 import { addToCart } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch } from '@/redux/hooks';
 
-
 import { IProduct } from '@/types';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -38,7 +37,6 @@ export default function ProductsList() {
     query['outOfStock'] = outOfStock;
   }
 
-  console.log('query', query);
   const products = productsData?.products || [];
 
   const resetStockFilterData = () => {
@@ -268,72 +266,77 @@ export default function ProductsList() {
                 stock: string | undefined;
               }) => (
                 <div key={product?.id} className="group relative my-8">
-                  <div className="block relative overflow-hidden">
-                    <button className="absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
-                      <span className="sr-only font-sans">Wishlist</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="h-4 w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                  <Reveal>
+                    <div className="block relative overflow-hidden">
+                      <button className="absolute end-4 top-4 z-8 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
+                        <span className="sr-only font-sans">Wishlist</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="h-4 w-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                          />
+                        </svg>
+                      </button>
+
+                      <div className="relative group">
+                        <Image
+                          src={product?.image || 'default-image-url'}
+                          alt=""
+                          className=" w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-50 "
+                          width={150}
+                          height={150}
                         />
-                      </svg>
-                    </button>
+                        <div className="absolute inset-0 bg-[#D8E4DD] opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                          <div className="text-black font-semibold">
+                            {/* Add your overlay content here */}
+                            <div className="flex items-center mb-2 mt-3 text-yellow-600 ml-3">
+                              <FaRegStar />
+                              <FaRegStar />
+                              <FaRegStar />
+                              <FaRegStar />
+                              <FaRegStar />
+                            </div>
+                            <p className="text-center font-sans mt-6">
+                              {product?.price}৳
+                            </p>
 
-                    <div className="relative group">
-                      <Image
-                        src={product?.image || 'default-image-url'}
-                        alt=""
-                        className=" w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-50 "
-                        width={150}
-                        height={150}
-                      />
-                      <div className="absolute inset-0 bg-[#D8E4DD] opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        <div className="text-black font-semibold">
-                          {/* Add your overlay content here */}
-                          <div className="flex items-center mb-2 mt-3 text-yellow-600 ml-3">
-                            <FaRegStar />
-                            <FaRegStar />
-                            <FaRegStar />
-                            <FaRegStar />
-                            <FaRegStar />
-                          </div>
-                          <p className="text-center font-sans mt-6">
-                            {product?.price}৳
-                          </p>
+                            <div className="flex justify-evenly mt-8 ">
+                              <Link href={`/products/${product?.id}`}>
+                                <FaEye className=" cursor-pointer w-[30px] h-[30px] text-yellow-800" />
+                              </Link>
 
-                          <div className="flex justify-evenly mt-8 ">
-                            <Link href={`/products/${product?.id}`}>
-                              <FaEye className=" cursor-pointer w-[30px] h-[30px] text-yellow-800" />
-                            </Link>
-
-                            <FaLuggageCart
-                              className="cursor-pointer w-[30px] h-[30px] text-red-800"
-                              onClick={() => {
-                                handleAddToCart(product);
-                              }}
-                            />
+                              <FaLuggageCart
+                                className="cursor-pointer w-[30px] h-[30px] text-red-800"
+                                onClick={() => {
+                                  handleAddToCart(product);
+                                }}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className="p-6 h-fit w-full">
-                      <p className="whitespace-normal ms-2 text-center text-sm line-clamp-1 font-sans font-semibold ">
-                        {product?.name}
-                      </p>
+                      <div className="p-6 h-fit w-full">
+                        <p className="whitespace-normal ms-2 text-center text-sm line-clamp-1 font-sans font-semibold ">
+                          {product?.name}
+                        </p>
 
-                      <p className="font-sans text-center"> {product?.stock}</p>
+                        <p className="font-sans text-center">
+                          {' '}
+                          {product?.stock}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Reveal>
                 </div>
               )
             )}

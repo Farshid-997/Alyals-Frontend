@@ -16,7 +16,8 @@ module.exports = {
       'cdn-icons-png.flaticon.com',
       'en.gliamicidipierrot.com',
       'cdn.vectorstock.com',
-      'static.helpjuice.com'
+      'static.helpjuice.com',
+      'encrypted-tbn0.gstatic.com',
     ],
   },
 };

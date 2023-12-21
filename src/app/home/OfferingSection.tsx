@@ -10,7 +10,7 @@ export default function OfferingSection() {
         animate={{ opacity: 1 }}
         transition={{ type: 'spring', stiffness: 100 }}
       >
-        <div className="flex flex-col justify-around  gap-10 md:flex-row  rounded-md mt-20 mb-7 max-w-screen-xl ">
+        <div className="flex flex-col justify-around  gap-10 md:flex-row  rounded-md mt-36 mb-7 max-w-screen-xl">
           <div className="flex items-center mb-4 md:mb-0  shadow-md p-6 bg-[#CBC5B9] rounded-md">
             <Image
               src="https://cdn-icons-png.flaticon.com/512/2037/2037477.png"

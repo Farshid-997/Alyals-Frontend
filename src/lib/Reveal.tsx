@@ -2,36 +2,38 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 interface Props {
   children: JSX.Element;
-  width?: 'fit-content' | '100%';
+  
 }
 
-export const Reveal = ({ children, width = 'fit-content' }: Props) => {
+export const Reveal = ({ children }:Props) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const inView = useInView(ref);
 
   const mainControls = useAnimation();
 
   useEffect(() => {
+    console.log('inView:', inView);
     if (inView) {
       mainControls.start('visible');
     }
-  }, [inView, mainControls]);
+  }, [inView,mainControls]);
+
   return (
-    <div ref={ref} style={{ position: 'relative', width, overflow: 'hidden' }}>
+    <div ref={ref}>
       <motion.div
         variants={{
           hidden: {
             opacity: 0,
-            y: 75,
+            y: 85,
           },
           visible: {
             opacity: 1,
-            y: 75,
+            y: 0,
           },
         }}
         initial="hidden"
         animate={mainControls}
-        transition={{ duration: 0.5, delay: 0.25 }}
+        transition={{ duration: 2, delay: 0.25 }}
       >
         {children}
       </motion.div>

@@ -5,6 +5,7 @@ import NewProduct from './NewProduct';
 import News from './News';
 import Offer from './Offer';
 import OfferingSection from './OfferingSection';
+import Review from './Review';
 import CarouselPage from './carousel';
 import Footer from './footer';
 import Navbar from './navbar';
@@ -14,7 +15,7 @@ import SideSection from './sectionSIde';
 function HomePage() {
   return (
     <div className="mx-auto max-w-screen-xl">
-      <Suspense fallback={<Loading/>}>
+      <Suspense fallback={<Loading />}>
         <Navbar />
 
         <CarouselPage />
@@ -23,7 +24,9 @@ function HomePage() {
         <NewProduct />
         <SideSection />
         <Offer />
+        <Review />
         <News />
+
         <Footer />
       </Suspense>
     </div>

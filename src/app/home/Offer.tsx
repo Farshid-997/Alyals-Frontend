@@ -7,7 +7,7 @@ export default function Offer() {
     <>
       
         {' '}
-        <div className="flex h-screen justify-center items-center flex-col -mt-24">
+        <div className="flex  justify-center items-center flex-col mt-56  mx-auto">
           <div className="w-full h-96 bg-[url('https://htmldemo.net/harosa/harosa-v2/assets/images/bg/bg_newletter.webp')] bg-cover bg-center  transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ">
             <div
               className="w-full h-full flex  justify-center items-center

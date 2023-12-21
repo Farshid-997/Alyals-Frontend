@@ -1,7 +1,7 @@
 'use client';
 import { useProductsQuery } from '@/redux/api/adminApi/productApi';
 import { IProduct } from '@/types';
-
+import Image from 'next/image';
 import Link from 'next/link';
 import { Key } from 'react';
 import { FaRegStar } from 'react-icons/fa';
@@ -74,10 +74,12 @@ export default function NewProduct() {
                     </button>
 
                     <Link href={`/products/${product?.id}`}>
-                      <img
+                      <Image
                         src={product?.image || 'default-image-url'}
                         alt=""
-                        className="h-20 w-full sm:h-full sm:w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-100"
+                        className=" w-full  sm:w-full object-fill transition duration-500 group-hover:scale-105 sm:h-72 cursor-pointer hover:brightness-100"
+                        width={150}
+                        height={150}
                       />
                     </Link>
 
@@ -99,15 +101,7 @@ export default function NewProduct() {
                         ৳ {product?.price}
                       </p>
 
-                      {/* <p
-                        className="text-black-500 text-center hover:text-red-900 cursor-pointer font-bold font-sans"
-                        onClick={() => {
-                          handleAddToCart(product);
-                        }}
-                      >
-                        {' '}
-                        ADD to Cart
-                      </p> */}
+                    
                     </div>
                   </div>
                 </div>
