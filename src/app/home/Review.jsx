@@ -1,8 +1,10 @@
 "use client"
 import { Reveal } from '@/lib/Reveal';
 import Image from 'next/image';
-import { FaRegStar } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 export default function Review() {
+
+
   return (
     <>
       <section className="container flex items-center mt-56">
@@ -12,7 +14,7 @@ export default function Review() {
               <Reveal>
                 <h2 className="text-3xl font-semibold mb-2 font-sans">
                   Products
-                  <span className="text-blue-900 underline underline-offset-4 font-sans ml-2">
+                  <span className="text-red-900 underline underline-offset-4 font-sans ml-2">
                     Reviwes
                   </span>{' '}
                   From our customers
@@ -52,12 +54,12 @@ export default function Review() {
                         href="#"
                         className="hover:underline hover:cursor-pointer hover:text-blue-500 transition-colors duration-75"
                       >
-                        <div className="flex items-center mb-2 mt-3 text-yellow-900 ">
-                          <FaRegStar />
-                          <FaRegStar />
-                          <FaRegStar />
-                          <FaRegStar />
-                          <FaRegStar />
+                        <div className="flex items-center mb-2 mt-3 text-yellow-600 ">
+                          <FaStar />
+                          <FaStar />
+                          <FaStar />
+                          <FaStar />
+                          <FaStar />
                         </div>
                       </a>
                     </p>

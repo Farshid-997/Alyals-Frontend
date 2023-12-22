@@ -36,7 +36,7 @@ export default function News() {
                     </svg>
                   </div>
                   <input
-                    className="block p-3 pl-10 w-full text-sm  rounded-lg border border-yellow-500 sm:rounded-none focus:outline-none sm:rounded-l-lg font-sans"
+                    className="block p-3 pl-10 w-full text-sm  rounded-md border border-blue-900 sm:rounded-none focus:outline-none sm:rounded-l-lg font-sans"
                     placeholder="Enter your email"
                     type="email"
                     id="email"
@@ -46,7 +46,7 @@ export default function News() {
                 <div>
                   <button
                     type="submit"
-                    className="py-3 px-7 w-full text-sm font-medium text-center rounded-md  bg-blue-900 text-white font-sans"
+                    className="py-3 px-7 w-full text-sm font-medium text-center rounded-md  bg-blue-900 text-white font-sans ml-2 p-3"
                   >
                     Subscribe
                   </button>

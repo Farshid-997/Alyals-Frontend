@@ -19,13 +19,13 @@ export default function UserPage() {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortOrder, setSortOrder] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [deleteUser] = useDeleteuserMutation();
+  const [deleteuser] = useDeleteuserMutation();
 
   query['limit'] = size;
   query['page'] = page;
   query['sortBy'] = sortBy;
   query['sortOrder'] = sortOrder;
-  // query["searchTerm"] = searchTerm;
+  
 
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
@@ -39,20 +39,8 @@ export default function UserPage() {
 
   const Users = data?.user;
   const meta = data?.meta;
-  console.log('fdfadfad', Users);
-  const deleteHandler = async (id: string) => {
-    message.loading('Deleting.....');
-    try {
-      //   console.log(data);
-      const res = await deleteUser(id);
-      if (res) {
-        message.success('Offered Course Deleted successfully');
-      }
-    } catch (err: any) {
-      //   console.error(err.message);
-      message.error(err.message);
-    }
-  };
+ 
+ 
 
   const columns = [
     {
@@ -100,13 +88,14 @@ export default function UserPage() {
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
-    console.log('Page:', page, 'PageSize:', pageSize);
+  
     setPage(page);
     setSize(pageSize);
   };
+
   const onTableChange = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
-    // console.log(order, field);
+    
     setSortBy(field as string);
     setSortOrder(order === 'ascend' ? 'asc' : 'desc');
   };
@@ -116,6 +105,16 @@ export default function UserPage() {
     setSortOrder('');
     setSearchTerm('');
   };
+
+ const deleteHandler = async (id: string) => {
+   try {
+     await deleteuser(id);
+
+     message.success('User Deleted successfully');
+   } catch (err: any) {
+     message.error(err.message);
+   }
+ };
 
   return (
     <div>

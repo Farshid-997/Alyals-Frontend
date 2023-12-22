@@ -147,7 +147,7 @@ export default function OrderPage() {
             <Select
               defaultValue={data.status}
               onChange={handleStatusChange}
-              className="ml-2"
+              className="mr-4"
             >
               {orderStatusOptions.map((status) => (
                 <Option key={status} value={status}>
@@ -169,10 +169,11 @@ export default function OrderPage() {
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
-    console.log('Page:', page, 'PageSize:', pageSize);
+    
     setPage(page);
     setSize(pageSize);
   };
+  
   const onTableChange = (pagination: any, filter: any, sorter: any) => {
     const { order, field } = sorter;
     // console.log(order, field);

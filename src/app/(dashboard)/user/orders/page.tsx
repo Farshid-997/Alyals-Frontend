@@ -20,6 +20,8 @@ export default function OrdersPage() {
       message.error(err.message);
     }
   };
+
+ 
   const columns = [
     {
       title: 'Product',
@@ -79,7 +81,7 @@ export default function OrdersPage() {
         return (
           <>
             <Button
-              onClick={() => deleteHandler(data.id)}
+              onClick={() => deleteHandler(data?.id)}
               type="primary"
               danger
               className="mt-2"
@@ -95,13 +97,16 @@ export default function OrdersPage() {
   return (
     <div>
       <p>Your Orders</p>
-      <UMTable
-        loading={isLoading}
-        columns={columns}
-        dataSource={data}
-        showSizeChanger={true}
-        showPagination={true}
-      />
+
+     
+        <UMTable
+          loading={isLoading}
+          columns={columns}
+          dataSource={data}
+          showSizeChanger={true}
+          showPagination={true}
+        />
+    
     </div>
   );
 }

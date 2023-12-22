@@ -8,7 +8,7 @@ import Link from 'next/link';
 function CategoryPage() {
   const query: Record<string, any> = {};
   const { data, isLoading } = useAllcategorysQuery(query);
-  const [deleteService] = useDeletecategoryMutation();
+  const [deletecategory] = useDeletecategoryMutation();
   const columns = [
     {
       title: 'name',
@@ -49,13 +49,13 @@ function CategoryPage() {
   ];
 
   const deleteHandler = async (id: string) => {
-    message.loading('Deleting.....');
+  
     try {
-      //   console.log(data);
-      await deleteService(id);
+      
+      await deletecategory(id);
       message.success('Category Deleted successfully');
     } catch (err: any) {
-      //   console.error(err.message);
+      
       message.error(err.message);
     }
   };

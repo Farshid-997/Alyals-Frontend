@@ -21,6 +21,7 @@ export const categoryApi = baseApi.injectEndpoints({
       }),
      
     }),
+    
     // create a new category
     addcategory: build.mutation({
       query: (data) => ({
