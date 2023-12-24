@@ -75,23 +75,23 @@ export default function OrdersPage() {
         return data && dayjs(data).format('MMM D, YYYY hh:mm A');
       },
     },
-    {
-      title: 'Action',
-      render: function (data: any) {
-        return (
-          <>
-            <Button
-              onClick={() => deleteHandler(data?.id)}
-              type="primary"
-              danger
-              className="mt-2"
-            >
-              Cancel
-            </Button>
-          </>
-        );
-      },
-    },
+    // {
+    //   title: 'Action',
+    //   render: function (data: any) {
+    //     return (
+    //       <>
+    //         <Button
+    //           onClick={() => deleteHandler(data?.id)}
+    //           type="primary"
+    //           danger
+    //           className="mt-2"
+    //         >
+    //           Cancel
+    //         </Button>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   return (

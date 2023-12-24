@@ -5,10 +5,9 @@ import UMTable from '@/components/ui/UMTable';
 import { useDeleteuserMutation, useUserQuery } from '@/redux/api/adminApi/userApi';
 import { useDebounced } from '@/redux/hooks';
 import {
-  DeleteOutlined,
   ReloadOutlined
 } from '@ant-design/icons';
-import { Button, Input, message } from 'antd';
+import { Button, Input } from 'antd';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 export default function UserPage() {
@@ -69,22 +68,22 @@ export default function UserPage() {
       },
       sorter: true,
     },
-    {
-      title: 'Action',
-      render: function (data: any) {
-        return (
-          <>
-            <Button
-              onClick={() => deleteHandler(data?.id)}
-              type="primary"
-              danger
-            >
-              <DeleteOutlined />
-            </Button>
-          </>
-        );
-      },
-    },
+    // {
+    //   title: 'Action',
+    //   render: function (data: any) {
+    //     return (
+    //       <>
+    //         <Button
+    //           onClick={() => deleteHandler(data?.id)}
+    //           type="primary"
+    //           danger
+    //         >
+    //           <DeleteOutlined />
+    //         </Button>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   const onPaginationChange = (page: number, pageSize: number) => {
@@ -106,15 +105,7 @@ export default function UserPage() {
     setSearchTerm('');
   };
 
- const deleteHandler = async (id: string) => {
-   try {
-     await deleteuser(id);
-
-     message.success('User Deleted successfully');
-   } catch (err: any) {
-     message.error(err.message);
-   }
- };
+ 
 
   return (
     <div>
@@ -148,6 +139,8 @@ export default function UserPage() {
             )}
           </div>
         </ActionBar>
+
+
 
         <UMTable
           loading={isLoading}

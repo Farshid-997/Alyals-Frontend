@@ -3,6 +3,7 @@ import ActionBar from '@/components/ui/ActionBar';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import UMTable from '@/components/ui/UMTable';
 import {
+  useDeleteorderMutation,
   useOrdersQuery,
   useUpdateorderMutation,
 } from '@/redux/api/orderApi/orderApi';
@@ -35,7 +36,7 @@ export default function OrderPage() {
   query['sortBy'] = sortBy;
   query['sortOrder'] = sortOrder;
   // query["searchTerm"] = searchTerm;
-
+  const [deleteorder] = useDeleteorderMutation();
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
@@ -49,21 +50,14 @@ export default function OrderPage() {
   const products = data?.orders;
   const meta = data?.meta;
 
-  const deleteHandler = async (id: string) => {
-    try {
-      //   console.log(data);
-      const res = await id;
-      if (res) {
-        message.success('Order Deleted successfully');
-      }
-    } catch (err: any) {
-      //   console.error(err.message);
-      message.error(err.message);
-    }
-  };
   const { Option } = Select;
 
   const orderStatusOptions = Object.values(OrderStatus);
+
+  const filteredProducts = products?.filter(
+    (product:any) => product.status !== OrderStatus.canceled
+  );
+
   const columns = [
     {
       title: 'Product',
@@ -143,11 +137,11 @@ export default function OrderPage() {
         };
 
         return (
-          <>
+          <div className='flex flex-row justify-between ml-2'>
             <Select
               defaultValue={data.status}
               onChange={handleStatusChange}
-              className="mr-4"
+              
             >
               {orderStatusOptions.map((status) => (
                 <Option key={status} value={status}>
@@ -155,14 +149,9 @@ export default function OrderPage() {
                 </Option>
               ))}
             </Select>
-            <Button
-              onClick={() => deleteHandler(data.id)}
-              type="primary"
-              danger
-            >
-              Cancel
-            </Button>
-          </>
+
+           
+          </div>
         );
       },
     },
@@ -198,7 +187,7 @@ export default function OrderPage() {
             },
           ]}
         />
-        <ActionBar title="Orderes">
+        <ActionBar title="Orders">
           <Input
             size="large"
             placeholder="Search"
@@ -207,7 +196,7 @@ export default function OrderPage() {
               width: '20%',
             }}
           />
-          <div>
+          <div >
             {(!!sortBy || !!sortOrder || !!searchTerm) && (
               <Button
                 style={{ margin: '0px 5px' }}
@@ -223,7 +212,7 @@ export default function OrderPage() {
         <UMTable
           loading={isLoading}
           columns={columns}
-          dataSource={products}
+          dataSource={filteredProducts}
           pageSize={size}
           totalPages={meta?.total}
           showSizeChanger={true}

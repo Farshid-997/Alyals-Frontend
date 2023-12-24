@@ -1,6 +1,7 @@
 'use client';
 
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
+import { useAllbrandsQuery } from '@/redux/api/adminApi/brandApi';
 import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import { useAddproductMutation } from '@/redux/api/adminApi/productApi';
 import { Button, message } from 'antd';
@@ -11,7 +12,10 @@ import FormSelectField from '../../../../../components/Froms/FormSelectField';
 import FormTextArea from '../../../../../components/Froms/FormTextArea';
 
 function CreateProducts() {
+  const { data:brand } = useAllbrandsQuery({});
+
   const { data, isLoading } = useAllcategorysQuery({});
+
   const [createProduct] = useAddproductMutation();
   const onSubmit = async (data: any) => {
     try {
@@ -23,6 +27,7 @@ function CreateProducts() {
       message.error(err.message);
     }
   };
+
   const categoryOptions = data?.map(
     (category: { name: string; id: number }) => {
       return {
@@ -31,7 +36,16 @@ function CreateProducts() {
       };
     }
   );
+
+  const brandOptions= brand?.map( (brand: { name: string; id: number }) => {
+      return {
+        label: brand?.name,
+        value: brand?.id,
+      };
+    })
+
   const base = 'admin';
+
   return (
     <div>
       <UMBreadCrumb
@@ -65,21 +79,31 @@ function CreateProducts() {
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="productstate" label="product State" />
           </div>
-          <div style={{ margin: '10px 0px' }}>
+
+          <div style={{ margin: '1px 0px' }}>
             <FormSelectField
               options={categoryOptions as SelectOptions[]}
               name="categoryId"
               label="Category"
             />
           </div>
+
+           <div style={{ marginLeft: '1rem' }}>
+            <FormSelectField
+              options={brandOptions as SelectOptions[]}
+              name="brandId"
+              label="Brand"
+            />
+          </div>
+
         </div>
 
         <Button
-          className="btn btn-primary ml-4 mt-3"
+          className="bg-blue-900 ml-4 mt-3"
           type="primary"
           htmlType="submit"
         >
-          add
+          Add product
         </Button>
       </Form>
     </div>
