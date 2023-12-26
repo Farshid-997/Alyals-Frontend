@@ -12,6 +12,7 @@ type UMTableProps = {
   onPaginationChange?: (page: number, pageSize: number) => void;
   onTableChange?: (pagination: any, filter: any, sorter: any) => void;
   showPagination?: boolean;
+  
 };
 
 const UMTable = ({

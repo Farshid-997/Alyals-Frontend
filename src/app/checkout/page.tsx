@@ -4,6 +4,7 @@ import { useAppSelector } from '@/redux/hooks';
 import { getUserInfo, removeCartAmountInfo, removeCartItemsInfo } from '@/services/auth.service';
 import { message } from 'antd';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import Footer from '../home/footer';
@@ -35,10 +36,7 @@ const CheckoutPage = () => {
       if (cartItemsValue) {
         removeCartItemsInfo('cartItems');
       }
-
-      
-
-      removeCartAmountInfo("totalAmount");
+   removeCartAmountInfo("totalAmount");
     };
 
     if (res?.id) {
@@ -222,25 +220,7 @@ const CheckoutPage = () => {
                     />
                   </div>
                 </div>
-                <div className="flex items-center mt-4">
-                  <label className="flex items-center text-sm group text-heading">
-                    <Controller
-                      name="saveInfo"
-                      control={control}
-                      defaultValue={false}
-                      render={({ field }) => (
-                        <input
-                          {...field}
-                          type="checkbox"
-                          className="w-5 h-5 border border-gray-300 rounded focus:outline-none focus:ring-1"
-                        />
-                      )}
-                    />
-                    <span className="ml-2">
-                      Save this information for next time
-                    </span>
-                  </label>
-                </div>
+                
                 <div className="relative pt-3 xl:pt-6">
                   <label
                     className="block mb-3 text-sm font-semibold text-gray-500"
@@ -285,10 +265,12 @@ const CheckoutPage = () => {
                 <ul className="space-y-4">
                   {cartItems.map((item) => (
                     <li className="flex items-center gap-4" key={item.id}>
-                      <img
+                      <Image
                         src={item.image}
                         alt={item.name}
                         className="h-16 w-16 rounded object-cover"
+                        width={200}
+                        height={200}
                       />
 
                       <div>

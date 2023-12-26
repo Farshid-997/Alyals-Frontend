@@ -50,7 +50,7 @@ export const orderApi = baseApi.injectEndpoints({
     // update
     updateorder: build.mutation({
       query: (data) => {
-        console.log('LOL:', data); // Add this line to log the data
+       
         return {
           url: `${order_URL}/${data.id}`,
           method: 'PATCH',

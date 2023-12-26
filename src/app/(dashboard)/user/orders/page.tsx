@@ -2,26 +2,11 @@
 import UMTable from '@/components/ui/UMTable';
 import { useUserOrderIdQuery } from '@/redux/api/orderApi/orderApi';
 import { getUserInfo } from '@/services/auth.service';
-import { Button, message } from 'antd';
-import dayjs from 'dayjs';
+import Link from 'next/link';
 
 export default function OrdersPage() {
   const { userId } = getUserInfo() as any;
   const { data, isLoading } = useUserOrderIdQuery(userId);
-  const deleteHandler = async (id: string) => {
-    try {
-      //   console.log(data);
-      const res = await id;
-      if (res) {
-        message.success('Order Deleted successfully');
-      }
-    } catch (err: any) {
-      //   console.error(err.message);
-      message.error(err.message);
-    }
-  };
-
- 
   const columns = [
     {
       title: 'Product',
@@ -68,45 +53,33 @@ export default function OrdersPage() {
       title: 'Product Status',
       dataIndex: 'status',
     },
-    {
-      title: 'Order Date',
-      dataIndex: 'createdAt',
-      render: function (data: any) {
-        return data && dayjs(data).format('MMM D, YYYY hh:mm A');
-      },
-    },
-    // {
-    //   title: 'Action',
-    //   render: function (data: any) {
-    //     return (
-    //       <>
-    //         <Button
-    //           onClick={() => deleteHandler(data?.id)}
-    //           type="primary"
-    //           danger
-    //           className="mt-2"
-    //         >
-    //           Cancel
-    //         </Button>
-    //       </>
-    //     );
-    //   },
-    // },
+   
   ];
 
+const base = 'user';
+
+ const hasDeliveredOrders =
+   data && data?.some((order:any) => order?.status === 'delivered');
+
+   
   return (
     <div>
-      <p>Your Orders</p>
+      <div className='flex justify-between'>
+        <p className="text-blue-900">Your Orders</p>
+        {hasDeliveredOrders && (
+          <Link href={`/${base}/review`}>
+            <p className="font-sans text-2xl text-blue-900">Review</p>{' '}
+          </Link>
+        )}
+      </div>
 
-     
-        <UMTable
-          loading={isLoading}
-          columns={columns}
-          dataSource={data}
-          showSizeChanger={true}
-          showPagination={true}
-        />
-    
+      <UMTable
+        loading={isLoading}
+        columns={columns}
+        dataSource={data}
+        showSizeChanger={true}
+        showPagination={true}
+      />
     </div>
   );
 }

@@ -3,9 +3,8 @@ import ActionBar from '@/components/ui/ActionBar';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import UMTable from '@/components/ui/UMTable';
 import {
-  useDeleteorderMutation,
   useOrdersQuery,
-  useUpdateorderMutation,
+  useUpdateorderMutation
 } from '@/redux/api/orderApi/orderApi';
 
 import { useDebounced } from '@/redux/hooks';
@@ -35,8 +34,7 @@ export default function OrderPage() {
   query['page'] = page;
   query['sortBy'] = sortBy;
   query['sortOrder'] = sortOrder;
-  // query["searchTerm"] = searchTerm;
-  const [deleteorder] = useDeleteorderMutation();
+
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
