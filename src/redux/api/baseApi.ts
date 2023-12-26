@@ -5,7 +5,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 export const baseApi = createApi({
   reducerPath: 'api',
   // baseQuery: axiosBaseQuery({
-  //   baseUrl: 'https://booking-service-farshid-997.vercel.app/api/v1',
+  //   baseUrl: 'https://alyals-backend-2r0i2kggi-farshid-997.vercel.app/api/v1',
   // }),
 
   baseQuery: axiosBaseQuery({
@@ -20,6 +20,6 @@ export const baseApi = createApi({
     'review',
     'product',
     'order',
-    'brand'
+    'brand',
   ],
 });
