@@ -6,7 +6,7 @@
 // export default function OfferingSection() {
 //    const items = [
 //      <div
-//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-[#CBC5B9] rounded-md"
+//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-[#CBC5B9] rounded-md ms-1"
 //        key={0}
 //      >
 //        <Image
@@ -24,7 +24,7 @@
 //      </div>,
 
 //      <div
-//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-gray-300 rounded-md"
+//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-gray-300 rounded-md ml-8"
 //        key={1}
 //      >
 //        <Image
@@ -42,7 +42,7 @@
 //      </div>,
 
 //      <div
-//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-[#EBEACA] rounded-md"
+//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-[#EBEACA] rounded-md ml-8"
 //        key={2}
 //      >
 //        <Image
@@ -62,7 +62,7 @@
 //      </div>,
 
 //      <div
-//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-[#EACEC3] rounded-md"
+//        className="flex items-center mb-4 md:mb-0 shadow-md p-6 bg-[#EACEC3] rounded-md  ml-8"
 //        key={3}
 //      >
 //        <Image
@@ -85,7 +85,7 @@
 //     <>
       
         
-//       <div className="flex flex-col justify-around   md:flex-row  rounded-md mt-36 mb-7 max-w-screen-xl">
+//       <div className="flex flex-col justify-around gap-10  md:flex-row  rounded-md mt-36 mb-7 max-w-screen-xl">
 //       <AnimatedList items={items} />
 //     </div>
 //     </>

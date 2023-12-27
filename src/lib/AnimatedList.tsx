@@ -14,7 +14,7 @@ const itemVariants: Variants = {
 const AnimatedList: React.FC<AnimatedListProps> = ({ items }) => {
   return (
     <motion.div
-      style={{ display: 'flex',justifyContent:"space-around",gap:"10px"}}
+     
       initial="hidden"
       animate="visible"
       variants={itemVariants}
@@ -23,7 +23,7 @@ const AnimatedList: React.FC<AnimatedListProps> = ({ items }) => {
       {items.map((item, index) => (
         <motion.div
           key={index}
-          style={{ marginRight: '30px' }}
+        
           variants={itemVariants}
         >
           {item}
