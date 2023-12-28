@@ -19,7 +19,7 @@ instance.interceptors.request.use(
       config.headers.Authorization = accessToken;
     }
     return config;
-  },
+  },   
   function (error) {
     // Do something with request error
     return Promise.reject(error);
@@ -72,3 +72,4 @@ instance.interceptors.response.use(
 );
 
 export { instance };
+

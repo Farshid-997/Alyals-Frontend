@@ -57,6 +57,14 @@ export const sidebarItems = (role: string) => {
     },
 
     {
+      label: (
+        <Link href={`/${role}/manage-notification/create`}>manage Notification</Link>
+      ),
+      icon: <TableOutlined />,
+      key: `/${role}/manage-notification`,
+    },
+
+    {
       label: <Link href={`/${role}/product-analytics`}>Product Analysis</Link>,
       icon: <TableOutlined />,
       key: `/${role}/product-analytics`,

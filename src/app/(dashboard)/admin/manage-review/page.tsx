@@ -11,7 +11,7 @@ import Link from 'next/link';
 function ReviewPage() {
   const query: Record<string, any> = {};
   const { data, isLoading } = useAllreviewsQuery(query);
-  console.log('fuck', data);
+ 
   const [deletereview] = useDeletereviewMutation();
   const columns = [
     {
