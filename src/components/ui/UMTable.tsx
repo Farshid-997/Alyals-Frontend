@@ -38,6 +38,7 @@ const UMTable = ({
 
   return (
     <Table
+    style={{width:"100%"}}
       loading={loading}
       columns={columns}
       dataSource={dataSource}

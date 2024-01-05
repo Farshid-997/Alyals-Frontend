@@ -19,16 +19,19 @@ const SideBar = () => {
     <Sider
       collapsible
       collapsed={collapsed}
+     
       onCollapse={(value) => setCollapsed(value)}
       width={280}
       style={{
         overflow: 'auto',
         height: '100vh',
+        
         position: 'sticky',
         left: 0,
         top: 0,
         bottom: 0,
       }}
+     
     >
       <div
         style={{
@@ -40,7 +43,7 @@ const SideBar = () => {
           padding: '10px 0px',
         }}
       >
-        <Link href="/">Alyals</Link>
+        <Link href="/" >Alyals</Link>
       </div>
       <Menu
         theme="dark"
