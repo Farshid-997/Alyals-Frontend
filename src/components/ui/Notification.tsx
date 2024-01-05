@@ -33,7 +33,7 @@ export default function Notification() {
               {/* {data[0]?.title} */} New Product is launching...
             </span>
 
-            {data.map((m: any) => (
+            {data?.map((m: any) => (
               <div key={m?.id} className="mb-2 text-sm font-normal font-sans">
                 Hi, {m?.content}
               </div>
