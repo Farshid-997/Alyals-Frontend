@@ -21,7 +21,7 @@ export const notificationApi = baseApi.injectEndpoints({
     }),
 
     getNotificationByUserId: build.query({
-      query: (id: string | string[] | undefined) => ({
+      query: (id: string ) => ({
         url: `${notification_URL}/${id}`,
         method: 'GET',
       }),

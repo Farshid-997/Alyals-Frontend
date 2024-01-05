@@ -4,28 +4,24 @@
 
 import { SelectOptions } from '@/components/Froms/FormMultiSelectField';
 import FormSelectField from '@/components/Froms/FormSelectField';
-import { useUserIdQuery } from '@/redux/api/adminApi/userApi';
-import { useAddNotificationMutation } from '@/redux/api/notificationApi';
-import { getUserInfo } from '@/services/auth.service';
+
+import { useAddNotificationToAllUserMutation } from '@/redux/api/notificationApi';
+
 import { Button, message } from 'antd';
 import Form from '../../../../../components/Froms/Form';
 import FormInput from '../../../../../components/Froms/FormInput';
 import FormTextArea from '../../../../../components/Froms/FormTextArea';
 
 function CreateNotificationPage() {
- const { userId } = getUserInfo() as any;
- const { data } = useUserIdQuery(userId);
- const id = data?.id;
-  const [addNotification] = useAddNotificationMutation();
-  const onSubmit = async (formData: any) => {
+
+
+  const [addNotificationToAllUser] = useAddNotificationToAllUserMutation();
+  const onSubmit = async (data: any) => {
     try {
 
-     const notificationData = {
-       ...formData,
-       userId: id,
-     };
-      const res = await addNotification(notificationData).unwrap();
-  
+     
+      const res = await addNotificationToAllUser(data).unwrap();
+   
       message.success('Notification  added successfully');
     } catch (err: any) {
       console.error(err.message);
@@ -46,18 +42,21 @@ function CreateNotificationPage() {
 
   return (
     <div>
+     
       <h1 className="text-3xl my-3 font-bold pl-4">
-        Create Notification to the user
+        Create Notification To All User
       </h1>
       <Form submitHandler={onSubmit}>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
-            <FormInput name="title" label="title" />
+            <FormInput name="title" label="Title" />
           </div>
 
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormTextArea name="content" label="Content" rows={4} />
           </div>
+
+         
 
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormSelectField

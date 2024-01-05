@@ -1,15 +1,31 @@
+"use client"
 import { authKey } from "@/constants/storageKey";
+import { useGetNotificationByUserIdQuery } from "@/redux/api/notificationApi";
 import { getUserInfo, removeUserInfo } from "@/services/auth.service";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaBell } from 'react-icons/fa';
+import Notification from "./Notification";
 const { Header: AntHeader } = Layout;
 
 
+
+
 const Header = () => {
-  const [show, setShow] = useState(false);
+   const { userId } = getUserInfo() as any;
+ 
+  const [showNotification, setShowNotification] = useState(false);
+
+
+ const { data, isLoading } =
+   useGetNotificationByUserIdQuery(userId);
+
+  const toggleNotification = () => {
+    setShowNotification(!showNotification);
+  };
+
   const router = useRouter();
 
   const logOut = () => {
@@ -42,20 +58,26 @@ const Header = () => {
         }}
       >
         {/* <Notification/> */}
-        <FaBell className="text-blue-900 cursor-pointer " />
+
+     
+    <FaBell
+          className="text-red-700 cursor-pointer "
+          size={26}
+          style={{ marginRight: '1rem', marginTop: '0.2rem' }}
+          onClick={toggleNotification}
+        />
+
+        {showNotification && (
+          <div className="absolute bottom-3 right-3">
+            <Notification></Notification>
+          </div>
+        )}
+
         
-        <p
-          style={{
-            margin: '0px 5px',
-          }}
-          className="text-blue-900 font-semibold font-sans"
-        >
-          {role.toUpperCase()}
-        </p>
 
         <Dropdown menu={{ items }}>
           <a>
-            <Space wrap size={16}>
+            <Space wrap size={12}>
               <Avatar size="large" icon={<UserOutlined />} />
             </Space>
           </a>
