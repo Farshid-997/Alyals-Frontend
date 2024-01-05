@@ -30,7 +30,7 @@ export default function Notification() {
         <div className="flex">
           <div className="ms-3 text-sm font-normal">
             <span className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
-              {data[0]?.title}
+              {/* {data[0]?.title} */} New Product is launching...
             </span>
 
             {data.map((m: any) => (
