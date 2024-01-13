@@ -6,11 +6,10 @@ import Link from 'next/link';
 import { Key } from 'react';
 import { FaRegStar } from 'react-icons/fa';
 export default function NewProduct() {
-  
   const { data } = useProductsQuery({});
 
   const products = data?.products || [];
-  
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -80,8 +79,6 @@ export default function NewProduct() {
                       <p className=" font-sans text-center ">
                         ৳ {product?.price}
                       </p>
-
-                    
                     </div>
                   </div>
                 </div>

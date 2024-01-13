@@ -20,8 +20,7 @@ export default function UpdateCategory({ params }: { params: { id: string } }) {
   };
   const onSubmit = async (datas: any) => {
     try {
-      datas.price = parseInt(datas.price);
-      datas.quantity = parseInt(datas.quantity);
+     
       const id = data?.id;
       const res = await updatecategory({ id, body: datas }).unwrap();
       

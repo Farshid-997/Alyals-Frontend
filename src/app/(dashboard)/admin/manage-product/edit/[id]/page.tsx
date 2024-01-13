@@ -3,6 +3,7 @@
 import { SelectOptions } from '@/components/Froms/FormMultiSelectField';
 import FormSelectField from '@/components/Froms/FormSelectField';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
+import { useAllbrandsQuery } from '@/redux/api/adminApi/brandApi';
 import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import {
   useProductIdQuery,
@@ -15,9 +16,10 @@ import FormTextArea from './../../../../../../components/Froms/FormTextArea';
 
 export default function UpdateProduct({ params }: { params: { id: string } }) {
   const { data } = useProductIdQuery(params?.id);
-  console.log(data);
+
   const [updateProduct] = useUpdateproductMutation();
   const { data: categoryID, isLoading } = useAllcategorysQuery({});
+  const { data: brandID, isLoading:load } =  useAllbrandsQuery({});
   const defaultValues = {
     name: data?.name || '',
     description: data?.description || '',
@@ -26,6 +28,7 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
     stock: data?.stock || '',
     quantity: data?.quantity || '',
     categoryId: data?.categoryId || '',
+    brandId:data?.brandId||""
   };
   const onSubmit = async (datas: any) => {
     try {
@@ -33,7 +36,7 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
       datas.quantity = parseInt(datas.quantity);
       const id = data?.id;
       const res = await updateProduct({ id, body: datas }).unwrap();
-      console.log('dssssss', res);
+     
       if ('id' in res) {
         message.success('Product Updated successfully');
       }
@@ -46,6 +49,15 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
       return {
         label: category?.name,
         value: category?.id,
+      };
+    }
+  );
+
+   const brandOptions = brandID?.map(
+    (brand: { name: string; id: number }) => {
+      return {
+        label: brand?.name,
+        value: brand?.id,
       };
     }
   );
@@ -79,11 +91,19 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="quantity" label="quantity" />
           </div>
-          <div style={{ margin: '10px 0px' }}>
+          <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormSelectField
               options={categoryOptions as SelectOptions[]}
               name="categoryId"
               label="Category"
+            />
+          </div>
+
+          <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
+            <FormSelectField
+              options={brandOptions as SelectOptions[]}
+              name="brandId"
+              label="Brand"
             />
           </div>
         </div>

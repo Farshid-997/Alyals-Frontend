@@ -42,18 +42,21 @@ export default function ProductPage() {
   }
   const { data, isLoading } = useProductsQuery({ ...query });
 
+
   const products = data?.products;
+
+  console.log(products)
   const meta = data?.meta;
 
   const deleteHandler = async (id: string) => {
     try {
-      //   console.log(data);
+      
       const res = await deleteProduct(id);
       if (res) {
         message.success('Product Deleted successfully');
       }
     } catch (err: any) {
-      //   console.error(err.message);
+      
       message.error(err.message);
     }
   };
@@ -83,9 +86,18 @@ export default function ProductPage() {
       dataIndex: 'categoryId', // Use the categoryId property
       sorter: true,
       render: function (data: any, record: any) {
-        // Access the category name from the Category object
         const categoryName = record.Category?.name || 'Category Not Found';
         return categoryName;
+      },
+    },
+
+    {
+      title: 'Brand',
+      dataIndex: 'brandId', 
+      sorter: true,
+      render: function (data: any, record: any) {
+        const brandName = record.Brand?.name || 'Brand Not Found';
+        return brandName;
       },
     },
     {

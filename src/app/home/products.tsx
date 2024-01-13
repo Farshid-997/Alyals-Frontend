@@ -1,5 +1,7 @@
 'use client';
 import { Reveal } from '@/lib/Reveal';
+import { useAllbrandsQuery } from '@/redux/api/adminApi/brandApi';
+import { useAllcategorysQuery } from '@/redux/api/adminApi/categoryApi';
 import { useProductsQuery } from '@/redux/api/adminApi/productApi';
 import { addToCart } from '@/redux/api/cartApi/cartApi';
 import { useAppDispatch } from '@/redux/hooks';
@@ -14,7 +16,8 @@ export default function ProductsList() {
   const [maxPrice, setMaxPrice] = useState<string>('');
   const [inStock, setInStock] = useState<boolean>(false);
   const [outOfStock, setOutOfStock] = useState<boolean>(false);
-
+  const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const query: Record<string, any> = {};
 
   const { data: productsData } = useProductsQuery({
@@ -22,6 +25,8 @@ export default function ProductsList() {
       ? { minPrice: parseFloat(minPrice), maxPrice: parseFloat(maxPrice) }
       : {}),
     stock: inStock ? 'in-stock' : outOfStock ? 'out-stock' : undefined,
+    brand: selectedBrand,
+    category: selectedCategory,
   });
 
   if (!!minPrice && !!maxPrice) {
@@ -37,8 +42,19 @@ export default function ProductsList() {
     query['outOfStock'] = outOfStock;
   }
 
-  const products = productsData?.products || [];
+   if (selectedBrand) {
+     query['brand'] = selectedBrand;
+   }
+ if (selectedCategory) {
+   query['category'] = selectedCategory;
+ }
 
+ 
+ 
+  const products = productsData?.products || [];
+   const { data, isLoading } = useAllbrandsQuery(query);
+ const { data:category, isLoading:load } = useAllcategorysQuery(query);
+ 
   const resetStockFilterData = () => {
     setInStock(false);
     setOutOfStock(false);
@@ -48,6 +64,21 @@ export default function ProductsList() {
     setMaxPrice('');
     setMinPrice('');
   };
+
+  const handleBrandSelect = (brandName: string) => {
+  
+
+    setSelectedBrand(brandName);
+    
+    
+  };
+
+  const handleCategorySelect = (categoryName: string) => {
+    setSelectedCategory(categoryName);
+   
+    
+  };
+
   const dispatch = useAppDispatch();
 
   const handleAddToCart = (item: {
@@ -77,7 +108,7 @@ export default function ProductsList() {
           </Reveal>
         </header>
 
-        <div className="mt-8 sm:flex sm:items-center sm:justify-between">
+        <div className="mt-8 sm:flex sm:items-center sm:justify-between ">
           <div className="hidden sm:flex sm:gap-4">
             <div className="relative">
               <details className="group [&_summary::-webkit-details-marker]:hidden">
@@ -167,6 +198,7 @@ export default function ProductsList() {
               </details>
             </div>
 
+            {/* price filter */}
             <div className="relative">
               <details className="group [&_summary::-webkit-details-marker]:hidden">
                 <summary className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
@@ -244,6 +276,120 @@ export default function ProductsList() {
                           />
                         </label>
                       </div>
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            {/* brand filter */}
+
+            <div className="relative">
+              <details className="group [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
+                  <span className="text-sm font-medium"> Brand </span>
+
+                  <span className="transition group-open:-rotate-180">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+
+                <div className="z-50 group-open:absolute group-open:top-auto group-open:mt-2 ltr:group-open:start-0">
+                  <div className="w-96 rounded border border-gray-200 bg-white">
+                    <header className="flex items-center justify-between p-4">
+                      <span className="text-sm text-gray-700">
+                        Select the Brand
+                      </span>
+
+                      <button
+                        type="button"
+                        className="text-sm text-gray-900 underline underline-offset-4"
+                        onClick={resetFilterData}
+                      >
+                        Reset
+                      </button>
+                    </header>
+
+                    <div className="border-t border-gray-200 p-4">
+                      {data?.map((brand: any) => (
+                        <p
+                          key={brand?.id}
+                          className="text-xl cursor-pointer font-bold my-4"
+                          onClick={() => handleBrandSelect(brand?.name)}
+                        >
+                          {brand?.name}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            {/* category filter */}
+
+            <div className="relative">
+              <details className="group [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
+                  <span className="text-sm font-medium">Category </span>
+
+                  <span className="transition group-open:-rotate-180">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+
+                <div className="z-50 group-open:absolute group-open:top-auto group-open:mt-2 ltr:group-open:start-0">
+                  <div className="w-96 rounded border border-gray-200 bg-white">
+                    <header className="flex items-center justify-between p-4">
+                      <span className="text-sm text-gray-700">
+                        Select the Category
+                      </span>
+
+                      <button
+                        type="button"
+                        className="text-sm text-gray-900 underline underline-offset-4"
+                        onClick={resetFilterData}
+                      >
+                        Reset
+                      </button>
+                    </header>
+
+                    <div className="border-t border-gray-200 p-4">
+                      {category?.map((category: any) => (
+                        <p
+                          key={category?.id}
+                          className="text-xl cursor-pointer font-bold my-4"
+                          onClick={() => handleCategorySelect(category?.name)}
+                        >
+                          {category?.name}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 </div>

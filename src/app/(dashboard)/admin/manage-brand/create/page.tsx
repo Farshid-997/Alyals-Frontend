@@ -14,9 +14,9 @@ function CreateBrandPage() {
   const onSubmit = async (data: any) => {
     
     try {
-      console.log(data);
+     
       const res = await addbrand(data).unwrap();
-      console.log(res);
+     
       message.success('Brand added successfully');
     } catch (err: any) {
       console.error(err.message);
@@ -28,7 +28,7 @@ function CreateBrandPage() {
       <UMBreadCrumb
         items={[
           { label: `${base}`, link: `/${base}` },
-          { label: 'manage-category', link: `/${base}/manage-category` },
+          { label: 'manage-brand', link: `/${base}/manage-brand` },
         ]}
       />
       <h1 className="text-3xl my-3 font-bold pl-4">Create Brand</h1>
