@@ -1,8 +1,8 @@
 'use client';
 import UMTable from '@/components/ui/UMTable';
 import {
-    useAllblogsQuery,
-    useDeleteblogMutation,
+  useAllblogsQuery,
+  useDeleteblogMutation,
 } from '@/redux/api/adminApi/blogApi';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Button, message } from 'antd';
@@ -57,9 +57,9 @@ function BlogsPage() {
   ];
 
   const deleteHandler = async (id: string) => {
-    message.loading('Deleting.....');
+   
     try {
-      //   console.log(data);
+     
       await deleteBlog(id);
       message.success('Blogs Deleted successfully');
     } catch (err: any) {

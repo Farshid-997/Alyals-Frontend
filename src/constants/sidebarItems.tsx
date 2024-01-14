@@ -68,13 +68,23 @@ export const sidebarItems = (role: string) => {
 
     {
       label: (
-        <Link href={`/${role}/manage-notification-all-user/create`}>
-          manage Notification to all user
+        <Link href={`/${role}/manage-blog/create`}>
+         Blog
         </Link>
       ),
       icon: <TableOutlined />,
-      key: `/${role}/manage-notification-all-user`,
+      key: `/${role}/manage-blog`,
     },
+
+    // {
+    //   label: (
+    //     <Link href={`/${role}/manage-notification-all-user/create`}>
+    //       manage Notification to all user
+    //     </Link>
+    //   ),
+    //   icon: <TableOutlined />,
+    //   key: `/${role}/manage-notification-all-user`,
+    // },
 
     {
       label: <Link href={`/${role}/product-analytics`}>Product Analysis</Link>,

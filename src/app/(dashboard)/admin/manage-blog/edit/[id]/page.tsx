@@ -5,29 +5,32 @@ import FormInput from '@/components/Froms/FormInput';
 import FormTextArea from '@/components/Froms/FormTextArea';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import {
-    useBlogIdQuery,
-    useUpdateblogMutation,
+  useBlogIdQuery,
+  useUpdateblogMutation,
 } from '@/redux/api/adminApi/blogApi';
 import { Button, message } from 'antd';
 // import FormTextArea from './../../../../../../components/froms/FormTextArea';
 
 export default function EditBlogPage({ params }: { params: { id: string } }) {
   const { data } = useBlogIdQuery(params?.id);
+  
+  const [updateBlogs] = useUpdateblogMutation();
+
+
   const defaultValues = {
     authorName: data?.authorName || '',
     content: data?.content || '',
     title: data?.title || '',
     image: data?.image || '',
   };
-  const [updateBlogs] = useUpdateblogMutation();
-  console.log(data);
   const onSubmit = async (data: any) => {
-    message.loading('Creating.....');
+  
     try {
       console.log(data);
-      const res = await updateBlogs(data);
+      const id=data?.id
+      const res = await updateBlogs({id,body:data}).unwrap();
       console.log(res);
-      message.success('Blogs added successfully');
+      message.success('Blogs Update successfully');
     } catch (err: any) {
       console.error(err.message);
     }

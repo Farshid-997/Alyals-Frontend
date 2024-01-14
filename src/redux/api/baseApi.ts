@@ -21,5 +21,6 @@ export const baseApi = createApi({
     'product',
     'order',
     'brand',
+    'blog'
   ],
 });

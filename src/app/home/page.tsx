@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import Loading from '../loading';
+import BestProduct from './BestSeller';
+import BlogPage from './Blogs';
 import NewProduct from './NewProduct';
 import News from './News';
 import Offer from './Offer';
@@ -12,6 +14,7 @@ import Navbar from './navbar';
 import ProductsList from './products';
 import SideSection from './sectionSIde';
 
+
 function HomePage() {
   return (
     <div className="mx-auto max-w-screen-xl">
@@ -22,9 +25,13 @@ function HomePage() {
         <OfferingSection />
         <ProductsList />
         <NewProduct />
+
+        <BestProduct/>
         <SideSection />
         <Offer />
         <Review />
+
+        <BlogPage/>
         <News />
 
         <Footer />

@@ -5,13 +5,17 @@ import FormInput from '@/components/Froms/FormInput';
 import FormTextArea from '@/components/Froms/FormTextArea';
 import UMBreadCrumb from '@/components/ui/UMBreadCrumb';
 import { useAddblogMutation } from '@/redux/api/adminApi/blogApi';
+import { useUserIdQuery } from '@/redux/api/adminApi/userApi';
 import { getUserInfo } from '@/services/auth.service';
 import { Button, message } from 'antd';
 
 function CreateBlogsPage() {
   const [addBlogs, { isLoading, error, isSuccess }] = useAddblogMutation();
-  const { id } = getUserInfo() as any;
-  console.log(id);
+ const { userId } = getUserInfo() as any;
+ const { data } = useUserIdQuery(userId);
+ const id = data?.id;
+
+
   const onSubmit = async (data: any) => {
    
     try {
