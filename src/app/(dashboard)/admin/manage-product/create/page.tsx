@@ -19,6 +19,7 @@ function CreateProducts() {
   const [createProduct] = useAddproductMutation();
   const onSubmit = async (data: any) => {
     try {
+      data.discount = parseFloat(data.discount);
       const res = await createProduct(data).unwrap();
 
       message.success('Product added successfully');
@@ -56,7 +57,7 @@ function CreateProducts() {
       />
       <h1 className="text-3xl my-3 font-bold pl-4">Create Product</h1>
       <Form submitHandler={onSubmit}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-2 gap-2">
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="name" label="Name" />
           </div>
@@ -69,6 +70,14 @@ function CreateProducts() {
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="price" label="price" />
           </div>
+
+          <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
+            <FormInput
+              name="discount"
+              label="Discount"
+             
+            />
+          </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="stock" label="stock" />
           </div>
@@ -80,7 +89,7 @@ function CreateProducts() {
             <FormInput name="productstate" label="product State" />
           </div>
 
-          <div style={{ margin: '1px 0px' }}>
+          <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormSelectField
               options={categoryOptions as SelectOptions[]}
               name="categoryId"
@@ -88,14 +97,13 @@ function CreateProducts() {
             />
           </div>
 
-           <div style={{ marginLeft: '1rem' }}>
+          <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormSelectField
               options={brandOptions as SelectOptions[]}
               name="brandId"
               label="Brand"
             />
           </div>
-
         </div>
 
         <Button
