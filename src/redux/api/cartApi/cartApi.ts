@@ -13,15 +13,11 @@ interface CartItem {
   price: number;
   quantity: number;
   subtotal?: number;
-  discount?:number;
-  image: string; // Add an 'image' property to store the image URL
+  discount:number;
+  image: string; 
 }
 
-// const cartItemsString = localStorage.getItem('cartItems');
-// const cartTotalAmount = localStorage.getItem('totalAmount');
 
-// const cartItems = cartItemsString !== null ? JSON.parse(cartItemsString) : [];
-// const totalAmount = cartTotalAmount !== null ? JSON.parse(cartTotalAmount) : 0;
 
 interface CartState {
   items: CartItem[];
@@ -71,14 +67,19 @@ const cartSlice = createSlice({
 
     addToCart: (state, action: PayloadAction<CartItem>) => {
       const { id, name, price, quantity, image, discount } = action.payload;
+
+      console.log("ggggggg",action.payload)
       const existingItem = state.items.find((item) => item.id === id);
 
+
+     
       if (existingItem) {
         existingItem.quantity += quantity;
 
         // Check if the product has a discount
         if (discount && discount > 0 && discount <= 100) {
           const discountedPrice = price - (price * discount) / 100;
+          console.log(discountedPrice)
           existingItem.subtotal = existingItem.quantity * discountedPrice;
         } else {
           existingItem.subtotal = existingItem.quantity * price;
@@ -100,6 +101,7 @@ const cartSlice = createSlice({
           quantity,
           subtotal,
           image,
+          discount
         });
       }
 

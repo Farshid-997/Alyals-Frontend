@@ -88,6 +88,7 @@ export default function ProductsList() {
     name: any;
     price: any;
     image: any;
+    discount:number
   }) => {
     dispatch(
       addToCart({
@@ -96,6 +97,7 @@ export default function ProductsList() {
         price: item.price,
         image: item.image,
         quantity: 1,
+        discount:item.discount
       })
     );
   };
@@ -412,7 +414,7 @@ export default function ProductsList() {
                 name: string | number;
                 price: string | number;
                 stock: string | undefined;
-                discount: number | undefined;
+                discount: number ;
               }) => (
                 <div key={product?.id} className="group relative my-8">
                   <Reveal>
