@@ -13,6 +13,7 @@ interface CartItem {
   price: number;
   quantity: number;
   subtotal?: number;
+  discount?:number;
   image: string; // Add an 'image' property to store the image URL
 }
 
@@ -36,21 +37,69 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+    // addToCart: (state, action: PayloadAction<CartItem>) => {
+    //   const { id, name, price, quantity, image } = action.payload; // Include 'image' property
+    //   const existingItem = state.items.find((item) => item.id === id);
+
+    //   if (existingItem) {
+    //     existingItem.quantity += quantity;
+    //     existingItem.subtotal = existingItem.quantity * price;
+    //   } else {
+    //     state.items.push({
+    //       id,
+    //       name,
+    //       price,
+    //       quantity,
+    //       subtotal: price * quantity,
+    //       image,
+    //     });
+    //   }
+
+    //   // Update the total sum
+    //   state.totalSum = state.items.reduce(
+    //     (total, item) => total + (item.subtotal || 0),
+    //     0
+    //   );
+
+    //   cartItemsInfo(
+    //     'cartItems',
+    //     JSON.stringify(state.items.map((item) => item))
+    //   );
+
+    //   cartAmountInfo('totalAmount', JSON.stringify(state.totalSum));
+    // },
+
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      const { id, name, price, quantity, image } = action.payload; // Include 'image' property
+      const { id, name, price, quantity, image, discount } = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
 
       if (existingItem) {
         existingItem.quantity += quantity;
-        existingItem.subtotal = existingItem.quantity * price;
+
+        // Check if the product has a discount
+        if (discount && discount > 0 && discount <= 100) {
+          const discountedPrice = price - (price * discount) / 100;
+          existingItem.subtotal = existingItem.quantity * discountedPrice;
+        } else {
+          existingItem.subtotal = existingItem.quantity * price;
+        }
       } else {
+        // Check if the product has a discount for the new item
+        let subtotal;
+        if (discount && discount > 0 && discount <= 100) {
+          const discountedPrice = price - (price * discount) / 100;
+          subtotal = quantity * discountedPrice;
+        } else {
+          subtotal = quantity * price;
+        }
+
         state.items.push({
           id,
           name,
           price,
           quantity,
-          subtotal: price * quantity,
-          image, // Include the image URL here
+          subtotal,
+          image,
         });
       }
 
@@ -59,17 +108,11 @@ const cartSlice = createSlice({
         (total, item) => total + (item.subtotal || 0),
         0
       );
-      // localStorage.setItem(
-      //   'cartItems',
-      //   JSON.stringify(state.items.map((item) => item))
-      // );
+
       cartItemsInfo(
         'cartItems',
         JSON.stringify(state.items.map((item) => item))
       );
-
-      // localStorage.setItem('totalAmount', JSON.stringify(state.totalSum));
-
       cartAmountInfo('totalAmount', JSON.stringify(state.totalSum));
     },
 
@@ -91,6 +134,7 @@ const cartSlice = createSlice({
         0
       );
     },
+
     removeFromCart: (state, action: PayloadAction<number>) => {
       const itemId = action.payload;
       const itemIndex = state.items.findIndex((item) => item.id === itemId);
