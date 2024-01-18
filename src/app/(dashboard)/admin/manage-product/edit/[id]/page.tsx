@@ -28,12 +28,14 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
     stock: data?.stock || '',
     quantity: data?.quantity || '',
     categoryId: data?.categoryId || '',
-    brandId:data?.brandId||""
+    brandId:data?.brandId||"",
+    discount:data?.discount||""
   };
   const onSubmit = async (datas: any) => {
     try {
       datas.price = parseInt(datas.price);
       datas.quantity = parseInt(datas.quantity);
+      datas.discount=parseFloat(datas.discount)
       const id = data?.id;
       const res = await updateProduct({ id, body: datas }).unwrap();
      
@@ -84,6 +86,10 @@ export default function UpdateProduct({ params }: { params: { id: string } }) {
           </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="price" label="price" />
+          </div>
+
+           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
+            <FormInput name="discount" label="Discount" />
           </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="stock" label="stock" />
