@@ -13,7 +13,7 @@ interface CartItem {
   price: number;
   quantity: number;
   subtotal?: number;
-  discount:number;
+  discount?:number;
   image: string; 
 }
 
@@ -33,37 +33,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    // addToCart: (state, action: PayloadAction<CartItem>) => {
-    //   const { id, name, price, quantity, image } = action.payload; // Include 'image' property
-    //   const existingItem = state.items.find((item) => item.id === id);
-
-    //   if (existingItem) {
-    //     existingItem.quantity += quantity;
-    //     existingItem.subtotal = existingItem.quantity * price;
-    //   } else {
-    //     state.items.push({
-    //       id,
-    //       name,
-    //       price,
-    //       quantity,
-    //       subtotal: price * quantity,
-    //       image,
-    //     });
-    //   }
-
-    //   // Update the total sum
-    //   state.totalSum = state.items.reduce(
-    //     (total, item) => total + (item.subtotal || 0),
-    //     0
-    //   );
-
-    //   cartItemsInfo(
-    //     'cartItems',
-    //     JSON.stringify(state.items.map((item) => item))
-    //   );
-
-    //   cartAmountInfo('totalAmount', JSON.stringify(state.totalSum));
-    // },
+   
 
     addToCart: (state, action: PayloadAction<CartItem>) => {
       const { id, name, price, quantity, image, discount } = action.payload;
@@ -79,7 +49,7 @@ const cartSlice = createSlice({
         // Check if the product has a discount
         if (discount && discount > 0 && discount <= 100) {
           const discountedPrice = price - (price * discount) / 100;
-          console.log(discountedPrice)
+         
           existingItem.subtotal = existingItem.quantity * discountedPrice;
         } else {
           existingItem.subtotal = existingItem.quantity * price;

@@ -295,7 +295,7 @@ function NavbarPage() {
                     <dl className="space-y-0.5 text-sm text-gray-700">
                       <div className="flex justify-between">
                         <dt className="font-sans">Subtotal</dt>
-                        {/* <dd>${totalSum.toFixed(2)}</dd> */}
+                        <dd>${totalSum.toFixed(2)}</dd>
                       </div>
 
                       <div className="flex justify-between font-sans">
@@ -347,6 +347,8 @@ function NavbarPage() {
                     </div>
                   </div>
                 </div>
+
+
               </div>
             </div>
           </div>
