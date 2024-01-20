@@ -1,5 +1,6 @@
 'use client';
 import Loading from '@/app/loading';
+import Analysis from '@/components/ui/Analysis';
 import { useGetProductCheckoutsForDayQuery } from '@/redux/api/orderApi/orderApi';
 import Chart from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
@@ -28,7 +29,7 @@ function ProductAnalysis() {
             {
               label: 'Product Count',
               data: data?.map((d) => d.count) || [],
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              backgroundColor: 'green',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 0,
             },
@@ -95,7 +96,9 @@ function ProductAnalysis() {
         Analytics
       </h1>
 
-      <canvas ref={chartRef} width={800} height={400} />
+      {/* <canvas ref={chartRef} width={800} height={400} /> */}
+
+      <Analysis/>
     </>
   );
 }
