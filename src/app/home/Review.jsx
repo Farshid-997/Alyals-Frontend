@@ -7,7 +7,7 @@ export default function Review() {
 
   return (
     <>
-      <section className="container flex items-center mt-56">
+      <section className="container flex items-center my-32">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center justify-between">
             <div className="mb-8 lg:mb-0 lg:w-1/2">

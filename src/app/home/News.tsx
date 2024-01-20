@@ -3,7 +3,7 @@
 export default function News() {
   return (
     <>
-      <div className="border border-slate-100 w-max-w-screen-xl mt-56"></div>
+      <div className="border border-slate-100 w-max-w-screen-xl "></div>
 
       <section className="bg-white mb-3">
         <div className="py-8 px-4 mx-auto max-w-screen-2xl lg:py-16 lg:px-6">

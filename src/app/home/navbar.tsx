@@ -60,7 +60,8 @@ function NavbarPage() {
     { name: 'HOME', link: '/home' },
 
     { name: 'ABOUT', link: '/' },
-    { name: 'CONTACT', link: '/' },
+
+    { name: 'Dashboard', link: '/profile' },
   ];
   let [toogle, setToggle] = useState(false);
 
@@ -264,7 +265,7 @@ function NavbarPage() {
                           </button>
                           <button
                             onClick={() => handleRemoveFromCart(item.id)}
-                            className="text-gray-600 transition hover:text-red-600"
+                            className="text-blue-600 transition hover:text-red-600"
                           >
                             <span className="sr-only font-sans">
                               Remove item

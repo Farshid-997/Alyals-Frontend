@@ -12,7 +12,7 @@ export default function UserPage() {
   const { userId } = getUserInfo() as any;
   const { data } = useUserIdQuery(userId);
   const id = data?.id;
-  console.log(data);
+ 
   const [updateUser] = useUpdateuserMutation();
 
   const defaultValues = {
