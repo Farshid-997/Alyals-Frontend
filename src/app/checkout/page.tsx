@@ -1,22 +1,33 @@
 'use client';
 import { useAddorderMutation } from '@/redux/api/orderApi/orderApi';
 import { useAppSelector } from '@/redux/hooks';
-import { getUserInfo, removeCartAmountInfo, removeCartItemsInfo } from '@/services/auth.service';
+import { getUserInfo, isLoggedIn, removeCartAmountInfo, removeCartItemsInfo } from '@/services/auth.service';
 import { message } from 'antd';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
+import { useLayoutEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Footer from '../home/footer';
 import NavbarPage from './../home/navbar';
 
 const CheckoutPage = () => {
+
+
   const router = useRouter();
   const { control, handleSubmit } = useForm();
   const [addOrder] = useAddorderMutation();
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
   const { userId } = getUserInfo() as any;
+
+   useLayoutEffect(() => {
+     const isLoggedin = isLoggedIn();
+     if (!isLoggedin) {
+       redirect('/login');
+     }
+   }, []);
+   
   const orderProduct: any[] = cartItems.map((cartItem) => ({
     productId: cartItem.id,
     quantity: cartItem.quantity,
