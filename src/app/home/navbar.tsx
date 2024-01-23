@@ -61,7 +61,7 @@ function NavbarPage() {
 
     { name: 'ABOUT', link: '/' },
 
-    { name: 'Dashboard', link: '/profile' },
+    { name: 'DASHBOARD', link: '/profile' },
   ];
   let [toogle, setToggle] = useState(false);
 
@@ -119,7 +119,7 @@ function NavbarPage() {
             className="font-bold text-2xl cursor-pointer flex items-center gap-1"
           >
             <Image src={img1} alt="" width={40} height={40} />
-            <span className="font-sans font-semibold text-2xl">Alyals</span>
+            <span className="font-sans font-semibold text-2xl">ALYALs</span>
           </div>
 
           <div
