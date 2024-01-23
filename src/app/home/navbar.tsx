@@ -122,6 +122,14 @@ function NavbarPage() {
             <span className="font-sans font-semibold text-2xl">ALYALs</span>
           </div>
 
+          {/* <Input
+            size="large"
+            placeholder="Search"
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{
+              width: '20%',
+            }}
+          /> */}
           <div
             onClick={() => setToggle(!toogle)}
             className="absolute right-8 top-6 cursor-pointer md:hidden w-7 h-7"
@@ -176,6 +184,7 @@ function NavbarPage() {
           </ul>
         </div>
       </div>
+
       <Drawer
         title="YOUR CART"
         placement="right"
@@ -299,15 +308,15 @@ function NavbarPage() {
                         <dd>${totalSum.toFixed(2)}</dd>
                       </div>
 
-                      <div className="flex justify-between font-sans">
+                      {/* <div className="flex justify-between font-sans">
                         <dt>৳ VAT</dt>
                         <dd>৳ 25</dd>
-                      </div>
+                      </div> */}
 
-                      <div className="flex justify-between font-sans">
+                      {/* <div className="flex justify-between font-sans">
                         <dt>Discount</dt>
                         <dd>-৳20</dd>
-                      </div>
+                      </div> */}
 
                       <div className="flex justify-between !text-base font-medium font-sans">
                         <dt>Total</dt>
@@ -348,8 +357,6 @@ function NavbarPage() {
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
