@@ -61,7 +61,7 @@ function NavbarPage() {
 
     { name: 'ABOUT', link: '/' },
 
-    { name: 'DASHBOARD', link: '/profile' },
+  
   ];
   let [toogle, setToggle] = useState(false);
 
