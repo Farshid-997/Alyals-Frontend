@@ -29,6 +29,22 @@ function CreateProducts() {
     }
   };
 
+  const stock=["sale","regular"]
+  const productstate=["new","normal"]
+  const stockOptions = stock.map((item) => {
+    return {
+      label: item,
+      value: item,
+    };
+  });
+
+  const productStateOptions = productstate.map((item) => {
+    return {
+      label: item,
+      value: item,
+    };
+  });
+  
   const categoryOptions = data?.map(
     (category: { name: string; id: number }) => {
       return {
@@ -68,25 +84,29 @@ function CreateProducts() {
             <FormTextArea name="description" label="Description" rows={4} />
           </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
-            <FormInput name="price" label="price" />
+            <FormInput name="price" label="Price" />
           </div>
 
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
-            <FormInput
-              name="discount"
-              label="Discount"
-             
-            />
+            <FormInput name="discount" label="Discount" />
           </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
-            <FormInput name="stock" label="stock" />
+            <FormSelectField
+              options={stockOptions as SelectOptions[]}
+              name="stock"
+              label="Stock"
+            />
           </div>
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
             <FormInput name="quantity" label="quantity" />
           </div>
 
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">
-            <FormInput name="productstate" label="product State" />
+            <FormSelectField
+              options={productStateOptions as SelectOptions[]}
+              name="productstate"
+              label="Product State"
+            />
           </div>
 
           <div className="w-full sm:col-span-2 xl:col-span-1 px-4">

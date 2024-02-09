@@ -24,17 +24,22 @@ function NavbarPage() {
  
   const query: Record<string, any> = {};
   const [searchTerm, setSearchTerm] = useState<string>('');
+
   const debouncedTerm = useDebounced({
     searchQuery: searchTerm,
     delay: 600,
   });
+
+
   if (debouncedTerm.length > 2) {
     query['searchTerm'] = debouncedTerm;
   }
+
   const { data, isLoading } = useProductsQuery({ ...query });
 
   const products = data?.products;
   const meta = data?.meta;
+
   const cartItems = useAppSelector((state) => state.cart.items);
   const totalSum = useAppSelector((state) => state.cart.totalSum);
   const [open, setOpen] = useState(false);
@@ -59,7 +64,7 @@ function NavbarPage() {
   let Links = [
     { name: 'HOME', link: '/home' },
 
-    { name: 'ABOUT', link: '/' },
+    // { name: 'ABOUT', link: '/' },
 
   
   ];
@@ -107,6 +112,10 @@ function NavbarPage() {
       ),
     },
   ];
+
+  
+
+
   return (
     <div className="mb-20 max-w-screen-xl ">
       <div className="shadow-md w-full fixed top-0 left-0 z-10">
@@ -136,13 +145,14 @@ function NavbarPage() {
           >
             {toogle ? <FaTimes /> : <FaBars />}
           </div>
+
           {/* link items */}
           <ul
             className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
               toogle ? 'top-12' : 'top-[-490px]'
             }`}
           >
-            {Links.map((link, index) => (
+            {/* {Links.map((link, index) => (
               <li
                 key={index}
                 className="md:ml-8 md:my-0 my-7 font-sans font-semibold"
@@ -154,13 +164,13 @@ function NavbarPage() {
                   {link.name}
                 </Link>
               </li>
-            ))}
+            ))} */}
             <FaShoppingCart
               onClick={showDrawer}
               className="w-7 h-7 cursor-pointer md:ml-20 hover:text-blue-900 "
             />
             <span className="ml-0.1 text-sm text-red-600 font-bold -mt-6">
-              {cartItems.length}
+              {cartItems.reduce((total, item) => total + item.quantity, 0)}
             </span>
 
             {userLoggedIn ? (
@@ -202,7 +212,7 @@ function NavbarPage() {
                   </h1>
                 )}
                 <ul className="space-y-4">
-                  {cartItems.map((item) => (
+                  {cartItems.map((item:any) => (
                     <li className="flex items-center gap-4" key={item.id}>
                       <Image
                         src={item?.image}
@@ -272,11 +282,12 @@ function NavbarPage() {
                           >
                             +
                           </button>
+
                           <button
-                            onClick={() => handleRemoveFromCart(item.id)}
-                            className="text-blue-600 transition hover:text-red-600"
+                            onClick={() => handleRemoveFromCart(item?.id)}
+                            className="text-red-600 transition "
                           >
-                            <span className="sr-only font-sans">
+                            <span className="sr-only font-sans" >
                               Remove item
                             </span>
                             <svg

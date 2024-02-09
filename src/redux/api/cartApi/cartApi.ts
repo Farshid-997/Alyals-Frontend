@@ -15,6 +15,7 @@ interface CartItem {
   subtotal?: number;
   discount?:number;
   image: string; 
+
 }
 
 
@@ -38,7 +39,7 @@ const cartSlice = createSlice({
     addToCart: (state, action: PayloadAction<CartItem>) => {
       const { id, name, price, quantity, image, discount } = action.payload;
 
-      console.log("ggggggg",action.payload)
+     
       const existingItem = state.items.find((item) => item.id === id);
 
 
@@ -118,8 +119,18 @@ const cartSlice = createSlice({
           (total, item) => total + (item.subtotal || 0),
           0
         );
+
+         cartItemsInfo(
+           'cartItems',
+           JSON.stringify(state.items.map((item) => item))
+         );
+         cartAmountInfo('totalAmount', JSON.stringify(state.totalSum));
       }
+
+        
     },
+
+
   },
 });
 

@@ -7,6 +7,9 @@ import Link from 'next/link';
 export default function OrdersPage() {
   const { userId } = getUserInfo() as any;
   const { data, isLoading } = useUserOrderIdQuery(userId);
+
+  const base = 'user';
+
   const columns = [
     {
       title: 'Product',
@@ -35,7 +38,6 @@ export default function OrdersPage() {
         }
       },
     },
-
     {
       title: 'Customer Phone',
       dataIndex: 'phone',
@@ -48,29 +50,34 @@ export default function OrdersPage() {
       title: 'Amount',
       dataIndex: 'totalAmount',
     },
-
     {
       title: 'Product Status',
       dataIndex: 'status',
     },
-   
+    {
+      title: 'Review',
+      render: function (data: any, record: any) {
+        if (record?.status === 'delivered') {
+          return (
+            <Link href={`/${base}/review`}>
+              <p className="font-sans text-md text-blue-900">Review</p>{' '}
+            </Link>
+          );
+        } else {
+          return 'N/A';
+        }
+      },
+    },
   ];
 
-const base = 'user';
+  const hasDeliveredOrders =
+    data && data?.some((order: any) => order?.status === 'delivered');
 
- const hasDeliveredOrders =
-   data && data?.some((order:any) => order?.status === 'delivered');
-
-   
   return (
     <div>
-      <div className='flex justify-between'>
-        <p className="text-blue-900">Your Orders</p>
-        {hasDeliveredOrders && (
-          <Link href={`/${base}/review`}>
-            <p className="font-sans text-2xl text-blue-900">Review</p>{' '}
-          </Link>
-        )}
+      <div className="flex justify-between">
+        <p className="text-black text-xl mb-4">Your Orders</p>
+      
       </div>
 
       <UMTable

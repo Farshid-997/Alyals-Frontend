@@ -1,6 +1,5 @@
 'use client';
 import Loading from '@/app/loading';
-import Analysis from '@/components/ui/Analysis';
 import { useGetProductCheckoutsForDayQuery } from '@/redux/api/orderApi/orderApi';
 import Chart from 'chart.js/auto';
 import { useEffect, useRef } from 'react';
@@ -12,9 +11,6 @@ interface ProductItem {
 function ProductAnalysis() {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
   const { data, error, isLoading } = useGetProductCheckoutsForDayQuery({});
-
-  
-
 
   const createChart = (data: ProductItem[]) => {
     const ctx = chartRef?.current?.getContext('2d');
@@ -29,7 +25,7 @@ function ProductAnalysis() {
             {
               label: 'Product Count',
               data: data?.map((d) => d.count) || [],
-              backgroundColor: 'green',
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
               borderWidth: 0,
             },
@@ -54,7 +50,6 @@ function ProductAnalysis() {
           barPercentage: 0.8,
           categoryPercentage: 0.8,
           barThickness: 200,
-          
         },
       });
     }
@@ -72,12 +67,9 @@ function ProductAnalysis() {
   };
 
   useEffect(() => {
-   
     destroyChart();
 
     if (data) {
-     
-     
       createChart(data);
     }
   }, [data]);
@@ -96,9 +88,7 @@ function ProductAnalysis() {
         Analytics
       </h1>
 
-      {/* <canvas ref={chartRef} width={800} height={400} /> */}
-
-      <Analysis/>
+      <canvas ref={chartRef} width={800} height={400} />
     </>
   );
 }

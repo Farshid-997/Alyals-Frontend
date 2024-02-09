@@ -27,6 +27,8 @@ const CheckoutPage = () => {
        redirect('/login');
      }
    }, []);
+
+   
    
   const orderProduct: any[] = cartItems.map((cartItem) => ({
     productId: cartItem.id,

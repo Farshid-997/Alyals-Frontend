@@ -14,8 +14,8 @@ import { FaEye, FaLuggageCart, FaRegStar } from 'react-icons/fa';
 export default function ProductsList() {
   const [minPrice, setMinPrice] = useState<string>('');
   const [maxPrice, setMaxPrice] = useState<string>('');
-  const [inStock, setInStock] = useState<boolean>(false);
-  const [outOfStock, setOutOfStock] = useState<boolean>(false);
+  const [sale, setSale] = useState<boolean>(false);
+  const [regular, setRegular] = useState<boolean>(false);
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const query: Record<string, any> = {};
@@ -24,7 +24,7 @@ export default function ProductsList() {
     ...(minPrice || maxPrice
       ? { minPrice: parseFloat(minPrice), maxPrice: parseFloat(maxPrice) }
       : {}),
-    stock: inStock ? 'in-stock' : outOfStock ? 'out-stock' : undefined,
+    stock: sale ? 'sale' : regular ? 'regular' : undefined,
     brand: selectedBrand,
     category: selectedCategory,
   });
@@ -34,12 +34,12 @@ export default function ProductsList() {
     query['maxPrice'] = maxPrice;
   }
 
-  if (inStock) {
-    query['inStock'] = inStock;
+  if (sale) {
+    query['sale'] = sale;
   }
 
-  if (outOfStock) {
-    query['outOfStock'] = outOfStock;
+  if (regular) {
+    query['regular'] = regular;
   }
 
    if (selectedBrand) {
@@ -53,14 +53,27 @@ export default function ProductsList() {
  
   const products = productsData?.products || [];
 
-  console.log("products",products)
+ 
    const { data, isLoading } = useAllbrandsQuery(query);
  const { data:category, isLoading:load } = useAllcategorysQuery(query);
  
   const resetStockFilterData = () => {
-    setInStock(false);
-    setOutOfStock(false);
+    setSale(false);
+    setRegular(false);
   };
+
+  const resetBrandData = () => {
+    setSelectedBrand("")
+    setSelectedCategory;
+  };
+
+
+    const resetCategoryData = () => {
+    
+      setSelectedCategory("")
+    };
+
+
 
   const resetFilterData = () => {
     setMaxPrice('');
@@ -114,6 +127,7 @@ export default function ProductsList() {
 
         <div className="mt-8 sm:flex sm:items-center sm:justify-between ">
           <div className="hidden sm:flex sm:gap-4">
+            {/* stock filter */}
             <div className="relative">
               <details className="group [&_summary::-webkit-details-marker]:hidden">
                 <summary className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
@@ -164,14 +178,14 @@ export default function ProductsList() {
                             type="checkbox"
                             id="FilterInStock"
                             className="h-5 w-5 rounded border-gray-300"
-                            checked={inStock}
+                            checked={sale}
                             onChange={(e) => {
-                              setInStock(e.target.checked);
+                              setSale(e.target.checked);
                             }}
                           />
 
                           <span className="text-sm font-medium text-gray-700">
-                            In Stock
+                            Sale
                           </span>
                         </label>
                       </li>
@@ -185,14 +199,14 @@ export default function ProductsList() {
                             type="checkbox"
                             id="FilterOutOfStock"
                             className="h-5 w-5 rounded border-gray-300"
-                            checked={outOfStock}
+                            checked={regular}
                             onChange={(e) => {
-                              setOutOfStock(e.target.checked);
+                              setRegular(e.target.checked);
                             }}
                           />
 
                           <span className="text-sm font-medium text-gray-700">
-                            Out of Stock
+                            Regular
                           </span>
                         </label>
                       </li>
@@ -321,7 +335,7 @@ export default function ProductsList() {
                       <button
                         type="button"
                         className="text-sm text-gray-900 underline underline-offset-4"
-                        onClick={resetFilterData}
+                        onClick={resetBrandData}
                       >
                         Reset
                       </button>
@@ -331,7 +345,7 @@ export default function ProductsList() {
                       {data?.map((brand: any) => (
                         <p
                           key={brand?.id}
-                          className="text-xl cursor-pointer font-bold my-4"
+                          className="text-md cursor-pointer font-semibold my-4"
                           onClick={() => handleBrandSelect(brand?.name)}
                         >
                           {brand?.name}
@@ -378,7 +392,7 @@ export default function ProductsList() {
                       <button
                         type="button"
                         className="text-sm text-gray-900 underline underline-offset-4"
-                        onClick={resetFilterData}
+                        onClick={resetCategoryData}
                       >
                         Reset
                       </button>
@@ -388,7 +402,7 @@ export default function ProductsList() {
                       {category?.map((category: any) => (
                         <p
                           key={category?.id}
-                          className="text-xl cursor-pointer font-bold my-4"
+                          className="text-md cursor-pointer font-semibold my-4"
                           onClick={() => handleCategorySelect(category?.name)}
                         >
                           {category?.name}
@@ -414,13 +428,13 @@ export default function ProductsList() {
                 name: string | number;
                 price: string | number;
                 stock: string | undefined;
-                discount: number ;
+                discount: number;
               }) => (
                 <div key={product?.id} className="group relative my-8">
                   <Reveal>
                     <div className="block relative overflow-hidden">
                       <p className="absolute end-4 top-4 z-8 rounded-full  p-1.5 text-blue-700 transition  font-bold font-sans tex-xl">
-                        {product?.discount ? `${product.discount} %` : ""}
+                        {product?.discount ? `${product.discount} %` : ''}
                       </p>
 
                       <div className="relative group">
